@@ -4,37 +4,24 @@
       <div class="about-card">
         <div class="about-left">
           <img 
-            src="https://via.placeholder.com/300x300/42b983/ffffff?text=Augusto+Arand" 
+            :src="profileImage" 
             alt="Augusto Arand" 
             class="profile-image"
           />
           <p class="intro-text">
-            Desenvolvedor Full Stack apaixonado por criar soluções inovadoras e eficientes.
-            Sempre em busca de novos desafios e aprendizados.
+            Estudante de Análise e Desenvolvimento de Sistemas | Entusiasta por Motos e Tecnologia
           </p>
         </div>
         <div class="about-right">
           <h2>Sobre Mim</h2>
           <p>
-            Olá! Sou Augusto Arand, desenvolvedor de software com experiência em diversas tecnologias 
-            e frameworks modernos. Tenho paixão por transformar ideias em realidade através do código.
-          </p>
-          <p>
-            Ao longo da minha carreira, trabalhei em projetos desafiadores que me permitiram 
-            desenvolver habilidades tanto no front-end quanto no back-end, sempre focando em 
-            entregar valor e qualidade.
-          </p>
-          <p>
-            Acredito em código limpo, boas práticas e na importância da colaboração em equipe. 
-            Estou sempre explorando novas tecnologias e metodologias para melhorar meu trabalho.
+            Apaixonado por motos e tecnologia, atualmente cursando Análise e Desenvolvimento de Sistemas no Centro Universitário Jorge Amado e atuando como Estagiário QA no Instituto Reconcavo de Tecnologia. Possuo experiência na execução de testes manuais, automatizados, funcionais e não funcionais, testes de regressão e confirmação. Experiênia na gestão e reporte de bugs utilizando Ferramentas como Jira e Azure DevOps. Experiênia com testes automatizados utilizando Cypress, RobotFramework, Appium e Selenium. Experiência em programação full-stack com: JavaScript, Node.js, Express, React, Next.js, Prisma ORM. Experiênia em gestão e consulta de banco de dados relacionais (PostgreSQL, MySQL). Possuo também certificação CPRE-FL (Engenharia de Requisitos - Nível Fundamental) pelo IREB.
           </p>
           <div class="skills-highlight">
             <h3>Destaques:</h3>
             <ul>
-              <li>🚀 Desenvolvimento Full Stack</li>
-              <li>💡 Soluções criativas e eficientes</li>
-              <li>🤝 Trabalho em equipe</li>
-              <li>📚 Aprendizado contínuo</li>
+              <li> 🚀 QA | Automação | DevOps | CPRE-FL </li>
+            
             </ul>
           </div>
         </div>
@@ -44,8 +31,15 @@
 </template>
 
 <script>
+import profileImage from '../assets/pics/profile-pic.png'
+
 export default {
-  name: 'AboutSection'
+  name: 'AboutSection',
+  data() {
+    return {
+      profileImage
+    }
+  }
 }
 </script>
 

@@ -24,60 +24,62 @@ export default {
   data() {
     return {
       articles: [
-        {
+
+      {
           id: 1,
-          title: 'Introdução ao Vue.js 3 e Composition API',
-          excerpt: 'Descubra as novidades do Vue.js 3 e como a Composition API pode melhorar a organização do seu código.',
-          date: '15 Nov 2024',
-          category: 'Vue.js',
+          title: 'Dose Diária de CPRE-FL - Cap. 02 PRINCIPIOS FUNDAMENTAIS DA ENGENHARIA DE REQUISITOS',
+          excerpt: 'A principal proposta de valor do CPRE-FL é padronizar a comunicação. Muitos projetos falham não por incompetência técnica na programação, mas porque o problema a ser resolvido foi mal compreendido ou mal documentado. ',
+          date: '10 Dez 2025',
+          category: 'CPRE-FL',
           readingTime: '5 min',
-          link: '#'
+          link: 'https://www.linkedin.com/analytics/post-summary/urn:li:activity:7404692249500151808/?skipRedirect=true'
         },
         {
           id: 2,
-          title: 'Melhores Práticas em JavaScript Moderno',
-          excerpt: 'Conheça as melhores práticas e padrões para escrever código JavaScript limpo e eficiente.',
-          date: '08 Nov 2024',
-          category: 'JavaScript',
-          readingTime: '7 min',
-          link: '#'
+          title: 'Dose Diária de CTFL Tester Foundation - Cap. 06 - Ferramentas de Teste',
+          excerpt: 'Neste artigo exploramos as principais ferramentas de teste segundo o CTFL Foundation Level',
+          date: '29 Out 2025',
+          category: 'CTFL-FL',
+          readingTime: '4 min',
+          link: 'https://www.linkedin.com/pulse/dose-diária-de-ctfl-tester-foundation-cap-06-teste-arandiba-e7fff/'
         },
         {
           id: 3,
-          title: 'Deploy Automatizado com GitHub Actions',
-          excerpt: 'Aprenda a configurar CI/CD para seus projetos usando GitHub Actions de forma simples e eficaz.',
-          date: '01 Nov 2024',
-          category: 'DevOps',
-          readingTime: '10 min',
-          link: '#'
+          title: 'Dose Diária de CTFL Tester Foundation - Cap. 04 - Análise e Modelagem de Teste',
+          excerpt: 'Nesta etapa crucial do ciclo de vida de testes, o foco é em compreender, estruturar e desenhar a estratégia de teste',
+          date: '22 Out 2025',
+          category: 'CTFL-FL',
+          readingTime: '4 min',
+          link: 'https://www.linkedin.com/pulse/dose-diária-de-ctfl-tester-foundation-cap-04-análise-arandiba-4y5bf/'
         },
         {
           id: 4,
-          title: 'Performance Web: Otimizando Aplicações Vue',
-          excerpt: 'Técnicas avançadas para melhorar a performance de suas aplicações Vue.js e proporcionar melhor experiência ao usuário.',
-          date: '25 Out 2024',
-          category: 'Performance',
-          readingTime: '8 min',
-          link: '#'
+          title: 'Dose Diária de CTFL Agile Tester - Cap. 02 - Principios Fundamentais, Práticas e Processos do Teste Ágil',
+          excerpt: 'Neste artigo será abordado o tópico 2.1. Atividades de Teste e Desenvolvimento, e o tópico 2.2. Produtos de Trabalho',
+          date: '06 Out 2025',
+          category: 'CTFL-AT',
+          readingTime: '4 min',
+          link: 'https://www.linkedin.com/analytics/post-summary/urn:li:activity:7381144621973766146/?skipRedirect=true'
         },
         {
           id: 5,
-          title: 'Arquitetura de Micro Frontends',
-          excerpt: 'Entenda o conceito de micro frontends e como aplicar essa arquitetura em projetos escaláveis.',
-          date: '18 Out 2024',
-          category: 'Arquitetura',
-          readingTime: '12 min',
-          link: '#'
+          title: 'Dose Diária de CTFL Tester Foundation- Cap. 02 - Tipos de Teste.',
+          excerpt: 'No CTFL Syllabus os níveis de teste são etapas completamente distintas dentro do processo de teste de software, dado que cada uma tem seus objetivos específicos, cargos responsáveis e o artefatos gerados em cada uma delas. ',
+          date: '09 Set 2025',
+          category: 'CTFL-FL',
+          readingTime: '5 min',
+          link: 'https://www.linkedin.com/analytics/post-summary/urn:li:activity:7371207686669012992/?skipRedirect=true'
         },
         {
           id: 6,
-          title: 'TypeScript: Além do Básico',
-          excerpt: 'Explore recursos avançados do TypeScript para criar aplicações mais robustas e type-safe.',
-          date: '10 Out 2024',
-          category: 'TypeScript',
-          readingTime: '9 min',
-          link: '#'
-        }
+          title: 'Dose Diária CTFL Tester Foundation - Cap. 02',
+          excerpt: 'Os testes ao longo do SDLC (Software Development Life Cycle), descrevem os tipos de atividades realizadas em cada estágio de um projeto, sua lógica, cronologia e entre outros.',
+          date: '02 Set 2025',
+          category: 'CTFL-FL',
+          readingTime: '5 min',
+          link: 'https://www.linkedin.com/analytics/post-summary/urn:li:activity:7368838098832568320/?skipRedirect=true'
+        },
+        
       ]
     }
   }

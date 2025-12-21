@@ -3,7 +3,7 @@
     <div class="container">
       <nav class="nav">
         <div class="logo">
-          <h1>Augusto Arand</h1>
+          <h1>Augusto Santos</h1>
         </div>
         <ul class="nav-links">
           <li><a href="#about">Sobre mim</a></li>

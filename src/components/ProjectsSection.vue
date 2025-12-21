@@ -37,6 +37,14 @@
 </template>
 
 <script>
+  // Importa
+import maptyImage from '../assets/pics/mapty.PNG'
+import pigGameImage from '../assets/pics/pig-game.PNG'
+import guessNumberImage from '../assets/pics/guess-my-number.PNG'
+import airBnbDemoImage from '../assets/pics/airbnb-demo.PNG'
+import simuladorBancoImage from '../assets/pics/simulador-banco.png'
+import motoConsultorImage from '../assets/pics//fastify-project.png'
+
 export default {
   name: 'ProjectsSection',
   data() {
@@ -44,33 +52,50 @@ export default {
       currentIndex: 0,
       projects: [
         {
-          title: 'E-commerce Platform',
-          description: 'Plataforma de e-commerce completa com carrinho de compras, pagamentos e gestão de produtos. Desenvolvida com Vue.js e Node.js.',
-          image: 'https://via.placeholder.com/600x400/42b983/ffffff?text=E-commerce',
-          tags: ['Vue.js', 'Node.js', 'MongoDB'],
-          link: '#'
+          title: 'Gerenciador de Exericios',
+          description: 'Desenvolvido em JS | CSS | HTML | Leatflet.js',
+          image: maptyImage,
+          tags: ['Javascript', 'CSS', 'HTML'],
+          link: 'https://augustoarand.github.io/mapty-exercise/'
         },
         {
-          title: 'Sistema de Gestão',
-          description: 'Sistema web para gestão empresarial com módulos de vendas, estoque e relatórios. Interface intuitiva e responsiva.',
-          image: 'https://via.placeholder.com/600x400/3498db/ffffff?text=Sistema+Gestao',
-          tags: ['React', 'Express', 'PostgreSQL'],
-          link: '#'
+          title: 'Pig Game',
+          description: 'Um mini game desenvolvido em através de JS, HTML e CSS',
+          image: pigGameImage,
+          tags: ['Javascript', 'CSS', 'HTML'],
+          link: 'https://augustoarand.github.io/pig-game/'
         },
         {
-          title: 'App Mobile',
-          description: 'Aplicativo mobile multiplataforma para delivery de alimentos com rastreamento em tempo real e pagamento integrado.',
-          image: 'https://via.placeholder.com/600x400/e74c3c/ffffff?text=App+Mobile',
-          tags: ['React Native', 'Firebase', 'API REST'],
-          link: '#'
+          title: 'Guess My Number',
+          description: 'Um mini game desenvolvido em através de JS, HTML e CSS.',
+          image: guessNumberImage,
+          tags: ['Javascript', 'CSS', 'HTML'],
+          link: 'https://augustoarand.github.io/guess-my-number/'
         },
         {
-          title: 'Dashboard Analytics',
-          description: 'Dashboard interativo para visualização de dados e análise de métricas com gráficos e relatórios customizados.',
-          image: 'https://via.placeholder.com/600x400/9b59b6/ffffff?text=Dashboard',
-          tags: ['Vue.js', 'D3.js', 'Python'],
+          title: 'AirBNB Demo',
+          description: 'Projeto desenvolvido em React + Next.js consumindo a API pública da própria Airbnb',
+          image: airBnbDemoImage,
+          tags: ['React', 'Next.js'],
           link: '#'
-        }
+        },
+
+        {
+          title: 'Simulador Conta Bancária',
+          description: 'Desenvolvido em JS | CSS e HTML',
+          image: simuladorBancoImage,
+          tags: ['Javascript', 'CSS', 'HTML'],
+          link: 'https://augustoarand.github.io/Bank-App/'
+        },
+
+        {
+          title: 'Gerenciador e Consultor de Motos',
+          description: '',
+          image: motoConsultorImage,
+          tags: ['Fastify', 'Node.js', 'JavaScript'],
+          link: 'https://api-fastify-opv8.onrender.com'
+        },
+
       ]
     }
   },

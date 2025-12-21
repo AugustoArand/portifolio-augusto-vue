@@ -19,7 +19,23 @@
   </section>
 </template>
 
+
+
 <script>
+
+  import vueIcon from '../assets/pics/vue.png'
+  import reactIcon from '../assets/pics/react.png'
+  import nodeIcon from '../assets/pics/node.png'
+  import rubyIcon from '../assets/pics/ruby.png'
+  import javascriptIcon from '../assets/pics/JS.jpg'
+  import robotIcon from '../assets/pics/robotframework.png'
+  import cypressIcon from '../assets/pics/cypress.png'
+  import postgresIcon from '../assets/pics/postgres.jpg'
+  import mongoIcon from '../assets/pics/mongodb.jpg'
+  import postmanIcon from '../assets/pics/postman.png'
+  import jmeterIcon from '../assets/pics/jmeter.png'
+  import jiraIcon from '../assets/pics/jira.png'
+
 export default {
   name: 'StacksSection',
   data() {
@@ -28,55 +44,76 @@ export default {
         {
           name: 'Vue.js',
           description: 'Framework JavaScript progressivo para construção de interfaces de usuário.',
-          icon: 'https://via.placeholder.com/80x80/42b983/ffffff?text=Vue',
+          icon: vueIcon,
           level: 90
         },
         {
           name: 'React',
-          description: 'Biblioteca JavaScript para construção de interfaces de usuário.',
-          icon: 'https://via.placeholder.com/80x80/61dafb/ffffff?text=React',
+          description: 'Desenvolvimento de projetos web utilizando React e Next.js.',
+          icon: reactIcon,
           level: 85
         },
         {
           name: 'Node.js',
-          description: 'Ambiente de execução JavaScript server-side.',
-          icon: 'https://via.placeholder.com/80x80/339933/ffffff?text=Node',
+          description: 'Desenvolvimento de APIs e RestAPIs, aplicações web com arquitetura MVC.',
+          icon: nodeIcon,
           level: 88
         },
         {
-          name: 'TypeScript',
-          description: 'Superset JavaScript tipado para desenvolvimento mais robusto.',
-          icon: 'https://via.placeholder.com/80x80/3178c6/ffffff?text=TS',
-          level: 82
+          name: 'Ruby on Rails',
+          description: 'Desenvolvimento fullstack com Ruby on Rails.',
+          icon: rubyIcon,
+          level: 65
         },
         {
-          name: 'Python',
-          description: 'Linguagem de programação versátil para web, data science e mais.',
-          icon: 'https://via.placeholder.com/80x80/3776ab/ffffff?text=Python',
+          name: 'Javascript',
+          description: 'Desenvolvimento de aplicações front e back end',
+          icon: javascriptIcon,
           level: 80
         },
         {
-          name: 'Docker',
-          description: 'Plataforma para desenvolvimento, envio e execução de aplicações em containers.',
-          icon: 'https://via.placeholder.com/80x80/2496ed/ffffff?text=Docker',
+          name: 'Robot Framework',
+          description: 'Automações Front e Back End, Integração com Selenium e Appium',
+          icon: robotIcon,
           level: 75
         },
         {
-          name: 'MongoDB',
-          description: 'Banco de dados NoSQL orientado a documentos.',
-          icon: 'https://via.placeholder.com/80x80/47a248/ffffff?text=Mongo',
+          name: 'Cypress',
+          description: 'Automações Front e Back End, integração com Cypress Cloud e GitHub Actions',
+          icon: cypressIcon,
           level: 78
         },
         {
           name: 'PostgreSQL',
-          description: 'Sistema de gerenciamento de banco de dados relacional.',
-          icon: 'https://via.placeholder.com/80x80/336791/ffffff?text=SQL',
+          description: 'Consulta e Gerenciamento de Banco de Dados Relacionais',
+          icon: postgresIcon,
           level: 80
         },
         {
-          name: 'Git',
-          description: 'Sistema de controle de versão distribuído.',
-          icon: 'https://via.placeholder.com/80x80/f05032/ffffff?text=Git',
+          name: 'MongoDB',
+          description: 'Criação, gestão, consulta de banco de dados NoSQL. ',
+          icon: mongoIcon,
+          level: 92
+        },
+
+        {
+          name: 'Postman',
+          description: 'Testes de APIs RESTful e automação de requisições.',
+          icon: postmanIcon,
+          level: 92
+        },
+
+        {
+          name: 'Jmeter',
+          description: 'Testes de carga e performance',
+          icon: jmeterIcon,
+          level: 92
+        },
+
+        {
+          name: 'Jira',
+          description: 'Gestão de projetos, criação de pipelines, gerenciamento e report de bugs.',
+          icon: jiraIcon,
           level: 92
         }
       ]
