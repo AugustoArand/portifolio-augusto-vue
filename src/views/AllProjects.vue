@@ -1,5 +1,5 @@
 <template>
-  <section id="projects" class="projects-section">
+  <section class="all-projects-page">
     <div class="section-background">
       <div class="floating-shapes">
         <div class="shape shape-1"></div>
@@ -8,23 +8,29 @@
       </div>
     </div>
     
+    <div class="projects-header">
+      <button 
+        class="back-btn"
+        @click="$router.push('/')"
+      >
+        <LeftOutlined /> Voltar
+      </button>
+      <h1 class="page-title">
+        <span class="title-gradient">Todos os Projetos</span>
+      </h1>
+      <p class="page-subtitle">
+        <span> Qualquer dúvida, contate-me! </span>
+      </p>
+    </div>
+
     <div class="projects-container">
-      <div class="section-header">
-        <h2 class="section-title">
-          <span class="title-gradient">Projetos</span>
-        </h2>
-        <p class="section-subtitle">
-          Conheça alguns dos projetos que desenvolvi ao longo da minha jornada
-        </p>
-      </div>
-      
       <a-row :gutter="[32, 32]">
         <a-col 
-          v-for="(project, index) in displayedProjects" 
+          v-for="(project, index) in projects" 
           :key="project.title" 
           :xs="24" 
           :sm="12" 
-          :lg="6"
+          :lg="8"
           class="project-col"
         >
           <div class="project-card" :style="{ animationDelay: `${index * 0.1}s` }">
@@ -69,22 +75,12 @@
           </div>
         </a-col>
       </a-row>
-      
-      <div v-if="projects.length > 4" class="view-all-container">
-        <button 
-          class="view-all-btn"
-          @click="$router.push('/projetos')"
-        >
-          Ver Todos os Projetos ({{ projects.length }})
-          <ArrowRightOutlined class="btn-arrow" />
-        </button>
-      </div>
     </div>
   </section>
 </template>
 
 <script>
-import { ProjectOutlined, ArrowRightOutlined, EyeOutlined } from '@ant-design/icons-vue'
+import { ProjectOutlined, ArrowRightOutlined, EyeOutlined, LeftOutlined } from '@ant-design/icons-vue'
 import maptyImage from '../assets/pics/mapty.PNG'
 import pigGameImage from '../assets/pics/pig-game.PNG'
 import guessNumberImage from '../assets/pics/guess-my-number.PNG'
@@ -94,11 +90,12 @@ import motoConsultorImage from '../assets/pics//fastify-project.png'
 import sistemaCondominioImage from '../assets/pics/cond-agend.png'
 
 export default {
-  name: 'ProjectsSection',
+  name: 'AllProjects',
   components: {
     ProjectOutlined,
     ArrowRightOutlined,
-    EyeOutlined
+    EyeOutlined,
+    LeftOutlined
   },
   data() {
     return {
@@ -112,17 +109,10 @@ export default {
         },
         {
           title: 'Gerenciador de Exericios',
-          description: 'Sistema de gerenciamento de atividades fisicas com a biblioteca de geolocalização Leaflet.js',
+          description: 'Desenvolvido em JS | CSS | HTML | Leatflet.js',
           image: maptyImage,
           tags: ['Javascript', 'CSS', 'HTML'],
           link: 'https://augustoarand.github.io/mapty-exercise/'
-        },
-        {
-          title: 'Gerenciador e Consultor de Motos',
-          description: 'API REST desenvolvida para o gerenciamento de motos e consulta de informações técnicas.',
-          image: motoConsultorImage,
-          tags: ['Fastify', 'Node.js', 'JavaScript'],
-          link: 'https://api-fastify-opv8.onrender.com'
         },
         {
           title: 'Pig Game',
@@ -152,23 +142,25 @@ export default {
           tags: ['Javascript', 'CSS', 'HTML'],
           link: 'https://augustoarand.github.io/Bank-App/'
         },
-        
+        {
+          title: 'Gerenciador e Consultor de Motos',
+          description: 'API REST desenvolvida com Fastify e Node.js',
+          image: motoConsultorImage,
+          tags: ['Fastify', 'Node.js', 'JavaScript'],
+          link: 'https://api-fastify-opv8.onrender.com'
+        }
       ]
-    }
-  },
-  computed: {
-    displayedProjects() {
-      return this.projects.slice(0, 4)
     }
   }
 }
 </script>
 
 <style scoped>
-.projects-section {
+.all-projects-page {
   position: relative;
+  min-height: 100vh;
   background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 50%, #0d3d2d 100%);
-  padding: 5rem 0;
+  padding: 2rem 0 5rem;
   overflow: hidden;
 }
 
@@ -190,7 +182,7 @@ export default {
 .shape {
   position: absolute;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(66, 185, 131, 0.1);
   animation: float 22s infinite ease-in-out;
 }
 
@@ -233,21 +225,42 @@ export default {
   }
 }
 
-.projects-container {
+.projects-header {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 2rem 4rem;
+  text-align: center;
   position: relative;
   z-index: 1;
 }
 
-.section-header {
-  text-align: center;
-  margin-bottom: 4rem;
+.back-btn {
+  position: absolute;
+  left: 2rem;
+  top: 0;
+  background: rgba(66, 185, 131, 0.2);
+  color: #42b983;
+  border: 1px solid rgba(66, 185, 131, 0.3);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.section-title {
-  margin-bottom: 1rem;
+.back-btn:hover {
+  background: rgba(66, 185, 131, 0.3);
+  transform: translateX(-5px);
+  box-shadow: 0 4px 15px rgba(66, 185, 131, 0.4);
+}
+
+.page-title {
+  margin-bottom: 1.5rem;
+  margin-top: 3rem;
 }
 
 .title-gradient {
@@ -261,11 +274,20 @@ export default {
   text-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.section-subtitle {
-  color: rgba(255, 255, 255, 0.95);
+.page-subtitle {
+  color: rgba(255, 255, 255, 0.9);
   font-size: 1.2rem;
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
+  line-height: 1.8;
+}
+
+.projects-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 1;
 }
 
 .project-col {
@@ -465,62 +487,34 @@ export default {
   transform: translateX(5px);
 }
 
-.view-all-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 4rem;
-}
-
-.view-all-btn {
-  background: linear-gradient(135deg, #42b983 0%, #34a870 100%);
-  color: white;
-  border: none;
-  padding: 1.2rem 3rem;
-  font-size: 1.1rem;
-  font-weight: 700;
-  border-radius: 50px;
-  box-shadow: 0 8px 30px rgba(66, 185, 131, 0.3);
-  transition: all 0.3s ease;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.view-all-btn:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 40px rgba(66, 185, 131, 0.5);
-  background: linear-gradient(135deg, #34a870 0%, #2d9361 100%);
-}
-
-.btn-arrow {
-  transition: transform 0.3s ease;
-  font-size: 1.2rem;
-}
-
-.view-all-btn:hover .btn-arrow {
-  transform: translateX(5px);
-}
-
 @media (max-width: 768px) {
-  .projects-section {
-    padding: 3rem 0;
+  .all-projects-page {
+    padding: 1rem 0 3rem;
   }
   
-  .projects-container {
-    padding: 0 1rem;
+  .projects-header {
+    padding: 0 1rem 3rem;
   }
 
-  .section-header {
-    margin-bottom: 2.5rem;
+  .back-btn {
+    position: static;
+    margin-bottom: 2rem;
+  }
+
+  .page-title {
+    margin-top: 0;
   }
   
   .title-gradient {
     font-size: 2rem;
   }
-
-  .section-subtitle {
+  
+  .page-subtitle {
     font-size: 1rem;
+  }
+  
+  .projects-container {
+    padding: 0 1rem;
   }
   
   .project-image-container {
