@@ -122,7 +122,7 @@ export default {
           description: 'API REST desenvolvida para o gerenciamento de motos e consulta de informações técnicas.',
           image: motoConsultorImage,
           tags: ['Fastify', 'Node.js', 'JavaScript'],
-          link: 'https://harley-davidson-frontend.onrender.com'
+          link: 'https://api-fastify-harley-front.onrender.com'
         },
         {
           title: 'Pig Game',
