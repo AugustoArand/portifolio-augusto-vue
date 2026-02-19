@@ -1,66 +1,60 @@
 <template>
   <section id="articles" class="articles-section">
-    <div class="section-background">
-      <div class="floating-shapes">
-        <div class="shape shape-1"></div>
-        <div class="shape shape-2"></div>
-        <div class="shape shape-3"></div>
-        <div class="shape shape-4"></div>
-      </div>
-    </div>
-    
-    <div class="articles-container">
+    <div class="container">
       <div class="section-header">
-        <a-typography-title :level="2" class="section-title">
-          <span class="title-gradient">Artigos</span>
-        </a-typography-title>
-        <p class="section-subtitle">Explorando conhecimento em Testes e Engenharia de Requisitos</p>
+        <p class="section-eyebrow">Conhecimento</p>
+        <h2 class="section-title">Artigos & Publicações</h2>
+        <p class="section-subtitle">Explorando QA, Engenharia de Requisitos e Desenvolvimento</p>
       </div>
 
-      <a-row :gutter="[32, 32]">
-        <a-col 
-          v-for="(article, index) in articles" 
-          :key="article.id" 
-          :xs="24" 
-          :sm="12" 
-          :lg="8"
-          class="article-col"
-        >
-          <div class="article-card" :style="{ animationDelay: `${index * 0.1}s` }">
-            <div class="card-gradient"></div>
-            <div class="card-content">
-              <div class="article-header">
-                <span class="article-date">
-                  <ClockCircleOutlined />
-                  {{ article.date }}
-                </span>
-                <span :class="['article-category', `category-${article.category.toLowerCase()}`]">
-                  {{ article.category }}
-                </span>
-              </div>
-              
-              <h3 class="article-title">{{ article.title }}</h3>
-              
-              <p class="article-excerpt">{{ article.excerpt }}</p>
-              
-              <div class="article-footer">
-                <span class="reading-time">
-                  <BookOutlined />
-                  {{ article.readingTime }}
-                </span>
-                <a 
-                  :href="article.link" 
-                  target="_blank" 
-                  class="read-more"
-                >
-                  Ler artigo
-                  <ArrowRightOutlined class="arrow-icon" />
-                </a>
+      <div class="articles-grid">
+        <!-- Large featured article -->
+        <div class="article-card article-featured">
+          <div class="article-top">
+            <div class="article-meta">
+              <span :class="['category-badge', `cat-${articles[0].category.toLowerCase().replace(/[^a-z]/g,'')}`]">
+                {{ articles[0].category }}
+              </span>
+              <span class="article-date">
+                <ClockCircleOutlined /> {{ articles[0].date }}
+              </span>
+            </div>
+            <h3 class="article-title">{{ articles[0].title }}</h3>
+            <p class="article-excerpt">{{ articles[0].excerpt }}</p>
+          </div>
+          <div class="article-footer">
+            <span class="reading-time"><BookOutlined /> {{ articles[0].readingTime }}</span>
+            <a :href="articles[0].link" target="_blank" class="read-link">
+              Ler artigo <ArrowRightOutlined />
+            </a>
+          </div>
+        </div>
+
+        <!-- Side list -->
+        <div class="article-list">
+          <a
+            v-for="article in articles.slice(1)"
+            :key="article.id"
+            :href="article.link"
+            target="_blank"
+            class="article-row"
+          >
+            <div class="row-left">
+              <span :class="['category-dot', `dot-${article.category.toLowerCase().replace(/[^a-z]/g,'')}`]"></span>
+              <div>
+                <div class="row-meta">
+                  <span class="row-category">{{ article.category }}</span>
+                  <span class="row-date">{{ article.date }}</span>
+                </div>
+                <p class="row-title">{{ article.title }}</p>
               </div>
             </div>
-          </div>
-        </a-col>
-      </a-row>
+            <div class="row-time">
+              <BookOutlined /> {{ article.readingTime }}
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -70,15 +64,10 @@ import { ClockCircleOutlined, ArrowRightOutlined, BookOutlined } from '@ant-desi
 
 export default {
   name: 'ArticlesSection',
-  components: {
-    ClockCircleOutlined,
-    ArrowRightOutlined,
-    BookOutlined
-  },
+  components: { ClockCircleOutlined, ArrowRightOutlined, BookOutlined },
   data() {
     return {
       articles: [
-
         {
           id: 1,
           title: 'Entre a Angústia de Heidegger e o Front-end: O que a filosofia ensina sobre aprender o novo.',
@@ -91,7 +80,7 @@ export default {
         {
           id: 2,
           title: 'Dose Diária de CPRE-FL - Cap. 02 PRINCIPIOS FUNDAMENTAIS DA ENGENHARIA DE REQUISITOS',
-          excerpt: 'A principal proposta de valor do CPRE-FL é padronizar a comunicação. Muitos projetos falham não por incompetência técnica na programação, mas porque o problema a ser resolvido foi mal compreendido ou mal documentado.',
+          excerpt: 'A principal proposta de valor do CPRE-FL é padronizar a comunicação. Muitos projetos falham não por incompetência técnica.',
           date: '10 Dez 2025',
           category: 'CPRE-FL',
           readingTime: '5 min',
@@ -109,7 +98,7 @@ export default {
         {
           id: 4,
           title: 'Dose Diária de CTFL Tester Foundation - Cap. 04 - Análise e Modelagem de Teste',
-          excerpt: 'Nesta etapa crucial do ciclo de vida de testes, o foco é em compreender, estruturar e desenhar a estratégia de teste',
+          excerpt: 'Nesta etapa crucial do ciclo de vida de testes, o foco é em compreender, estruturar e desenhar a estratégia.',
           date: '22 Out 2025',
           category: 'CTFL-FL',
           readingTime: '4 min',
@@ -117,8 +106,8 @@ export default {
         },
         {
           id: 5,
-          title: 'Dose Diária de CTFL Agile Tester - Cap. 02 - Principios Fundamentais, Práticas e Processos do Teste Ágil',
-          excerpt: 'Neste artigo será abordado o tópico 2.1. Atividades de Teste e Desenvolvimento, e o tópico 2.2. Produtos de Trabalho',
+          title: 'Dose Diária de CTFL Agile Tester - Cap. 02 - Principios do Teste Ágil',
+          excerpt: 'Atividades de Teste e Desenvolvimento no contexto ágil e seus produtos de trabalho.',
           date: '06 Out 2025',
           category: 'CTFL-AT',
           readingTime: '4 min',
@@ -127,7 +116,7 @@ export default {
         {
           id: 7,
           title: 'Dose Diária de CTFL Tester Foundation- Cap. 02 - Tipos de Teste.',
-          excerpt: 'No CTFL Syllabus os níveis de teste são etapas completamente distintas dentro do processo de teste de software, dado que cada uma tem seus objetivos específicos, cargos responsáveis e o artefatos gerados em cada uma delas.',
+          excerpt: 'Os níveis de teste no CTFL Syllabus são etapas completamente distintas dentro do processo de teste.',
           date: '09 Set 2025',
           category: 'CTFL-FL',
           readingTime: '5 min',
@@ -136,13 +125,12 @@ export default {
         {
           id: 8,
           title: 'Dose Diária CTFL Tester Foundation - Cap. 02',
-          excerpt: 'Os testes ao longo do SDLC (Software Development Life Cycle), descrevem os tipos de atividades realizadas em cada estágio de um projeto, sua lógica, cronologia e entre outros.',
+          excerpt: 'Os testes ao longo do SDLC descrevem os tipos de atividades realizadas em cada estágio do projeto.',
           date: '02 Set 2025',
           category: 'CTFL-FL',
           readingTime: '5 min',
           link: 'https://www.linkedin.com/analytics/post-summary/urn:li:activity:7368838098832568320/?skipRedirect=true'
         },
-
       ]
     }
   }
@@ -151,300 +139,248 @@ export default {
 
 <style scoped>
 .articles-section {
-  position: relative;
-  padding: 5rem 0;
-  overflow: hidden;
-  background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 50%, #0d3d2d 100%);
-}
-
-.section-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 0.1;
-}
-
-.floating-shapes {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-.shape {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  animation: float 20s infinite ease-in-out;
-}
-
-.shape-1 {
-  width: 300px;
-  height: 300px;
-  top: -100px;
-  left: -100px;
-  animation-delay: 0s;
-}
-
-.shape-2 {
-  width: 200px;
-  height: 200px;
-  top: 50%;
-  right: -50px;
-  animation-delay: 5s;
-}
-
-.shape-3 {
-  width: 150px;
-  height: 150px;
-  bottom: -50px;
-  left: 30%;
-  animation-delay: 10s;
-}
-
-.shape-4 {
-  width: 250px;
-  height: 250px;
-  top: 20%;
-  right: 20%;
-  animation-delay: 15s;
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translate(0, 0) rotate(0deg);
-  }
-  25% {
-    transform: translate(50px, 50px) rotate(90deg);
-  }
-  50% {
-    transform: translate(0, 100px) rotate(180deg);
-  }
-  75% {
-    transform: translate(-50px, 50px) rotate(270deg);
-  }
-}
-
-.articles-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  position: relative;
-  z-index: 1;
+  background: var(--color-bg-alt);
+  padding: 6rem 0;
+  border-top: 1px solid var(--color-border);
 }
 
 .section-header {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3.5rem;
+}
+
+.section-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-green);
+  margin-bottom: 0.75rem;
 }
 
 .section-title {
-  margin-bottom: 1rem;
-}
-
-.title-gradient {
-  background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-size: 3rem;
-  font-weight: 700;
-  display: inline-block;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-white);
+  margin-bottom: 0.75rem;
 }
 
 .section-subtitle {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 1.2rem;
-  margin: 0;
+  font-size: 1rem;
+  color: var(--color-text-muted);
 }
 
-.article-col {
-  animation: fadeInUp 0.8s ease-out forwards;
-  opacity: 0;
+/* ─── Layout ────────────────────────────────────── */
+.articles-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 1.5rem;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
+/* ─── Featured card ─────────────────────────────── */
 .article-card {
-  position: relative;
-  background: white;
-  border-radius: 20px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
   padding: 2rem;
-  height: 100%;
   display: flex;
   flex-direction: column;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
+  transition: border-color 0.3s ease;
+  position: relative;
   overflow: hidden;
 }
 
-.card-gradient {
+.article-card::before {
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 5px;
-  background: linear-gradient(90deg, #42b983 0%, #34a870 50%, #2d9361 100%);
-  transition: height 0.3s ease;
-}
-
-.article-card:hover .card-gradient {
-  height: 100%;
-  opacity: 0.05;
+  height: 3px;
+  background: linear-gradient(90deg, #42b983, #5de0a1, transparent);
 }
 
 .article-card:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 20px 60px rgba(66, 185, 131, 0.4);
+  border-color: rgba(66,185,131,0.3);
 }
 
-.card-content {
-  position: relative;
-  z-index: 1;
-}
+.article-top { margin-bottom: 1.5rem; }
 
-.article-header {
+.article-meta {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
   flex-wrap: wrap;
-  gap: 0.5rem;
 }
+
+.category-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.cat-dev     { background: rgba(168,85,247,0.15); border: 1px solid rgba(168,85,247,0.3); color: #c084fc; }
+.cat-cpre    { background: var(--color-green-dim); border: 1px solid rgba(66,185,131,0.3); color: var(--color-green); }
+.cat-ctflfl  { background: rgba(59,130,246,0.12); border: 1px solid rgba(59,130,246,0.3); color: #60a5fa; }
+.cat-ctflat  { background: rgba(249,115,22,0.12); border: 1px solid rgba(249,115,22,0.3); color: #fb923c; }
 
 .article-date {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  color: #888;
-  font-size: 0.9rem;
-}
-
-.article-category {
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.category-cpre-fl {
-  background: linear-gradient(135deg, #42b983 0%, #34a870 100%);
-  color: white;
-}
-
-.category-ctfl-fl {
-  background: linear-gradient(135deg, #34a870 0%, #2d9361 100%);
-  color: white;
-}
-
-.category-ctfl-at {
-  background: linear-gradient(135deg, #42b983 0%, #2d9361 100%);
-  color: white;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
 }
 
 .article-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #2c3e50;
-  margin-bottom: 1rem;
-  line-height: 1.4;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  min-height: 5.2rem;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--color-white);
+  line-height: 1.35;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
 }
 
 .article-excerpt {
-  color: #666;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
+  font-size: 0.92rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  flex-grow: 1;
 }
 
 .article-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 1rem;
-  border-top: 1px solid #eee;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border);
 }
 
 .reading-time {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  color: #888;
-  font-size: 0.9rem;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
 }
 
-.read-more {
+.read-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  color: #42b983;
-  font-weight: 600;
+  gap: 0.4rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--color-green);
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: gap 0.2s;
 }
 
-.read-more:hover {
-  color: #34a870;
-  gap: 10px;
+.read-link:hover { gap: 0.75rem; color: #5de0a1; }
+
+/* ─── Article list ──────────────────────────────── */
+.article-list {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-.arrow-icon {
-  transition: transform 0.3s ease;
+.article-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+  text-decoration: none;
+  transition: background 0.2s ease;
 }
 
-.read-more:hover .arrow-icon {
-  transform: translateX(4px);
+.article-row:last-child { border-bottom: none; }
+
+.article-row:hover { background: rgba(66,185,131,0.05); }
+
+.row-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 0;
 }
 
-@media (max-width: 768px) {
-  .articles-section {
-    padding: 3rem 0;
-  }
+.category-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 0.45rem;
+}
 
-  .articles-container {
-    padding: 0 1rem;
-  }
+.dot-dev     { background: #c084fc; }
+.dot-cprefl  { background: var(--color-green); }
+.dot-ctflfl  { background: #60a5fa; }
+.dot-ctflat  { background: #fb923c; }
 
-  .section-header {
-    margin-bottom: 2.5rem;
-  }
+.row-meta {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
 
-  .title-gradient {
-    font-size: 2rem;
-  }
+.row-category {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-green);
+}
 
-  .section-subtitle {
-    font-size: 1rem;
-  }
+.row-date {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
 
-  .article-card {
-    padding: 1.5rem;
-  }
+.row-title {
+  font-size: 0.87rem;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 
-  .article-title {
-    font-size: 1.1rem;
-  }
+.article-row:hover .row-title { color: var(--color-white); }
+
+.row-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ─── Responsive ────────────────────────────────── */
+@media (max-width: 900px) {
+  .articles-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .article-card { padding: 1.5rem; }
 }
 </style>

@@ -1,441 +1,480 @@
 <template>
   <section id="about" class="about-section">
-    <div class="section-background">
-      <div class="floating-shapes">
-        <div class="shape shape-1"></div>
-        <div class="shape shape-2"></div>
-        <div class="shape shape-3"></div>
+    <!-- Hero -->
+    <div class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-left">
+            <div class="avatar-ring">
+              <img :src="profileImage" alt="Augusto Santos" class="avatar-img" />
+            </div>
+          </div>
+
+          <div class="hero-right">
+            <!-- <div class="hero-eyebrow">
+              <span class="status-dot"></span>
+              Disponível para novas oportunidades
+            </div> -->
+
+            <h1 class="hero-title">
+              Olá, sou <span class="highlight">Augusto Santos</span>
+            </h1>
+
+            <p class="hero-tagline">
+              QA · Desenvolvedor Full-Stack · CPRE-FL Certified
+            </p>
+
+            <p class="hero-bio">
+              Apaixonado por motos e tecnologia, atualmente cursando <strong>Análise e Desenvolvimento de Sistemas</strong> e atuando como <strong>Estagiário QA</strong> na Tecsinapse. Certificado <strong>CPRE-FL</strong> pelo IREB.
+            </p>
+
+            <div class="hero-tags">
+              <span class="tag">Testes Automatizados</span>
+              <span class="tag">Cypress</span>
+              <span class="tag">Robot Framework</span>
+              <span class="tag">DevOps</span>
+              <span class="tag">Node.js</span>
+            </div>
+
+            <div class="hero-actions">
+              <a href="/#projects" @click.prevent="scrollTo('projects')" class="btn btn-primary">
+                Ver Projetos
+                <ArrowRightOutlined />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/augusto-arandiba-b26b90105/"
+                target="_blank"
+                class="btn btn-ghost"
+              >
+                <LinkedinOutlined />
+                LinkedIn
+              </a>
+              <a
+                href="https://github.com/AugustoArand"
+                target="_blank"
+                class="btn btn-ghost"
+              >
+                <GithubOutlined />
+                GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats row -->
+        <div class="stats-row">
+          <div class="stat-item" v-for="s in stats" :key="s.label">
+            <span class="stat-value">{{ s.value }}</span>
+            <span class="stat-label">{{ s.label }}</span>
+          </div>
+        </div>
       </div>
     </div>
-    
-    <div class="about-container">
-      <a-row :gutter="[48, 32]" align="middle">
-        <a-col :xs="24" :md="8">
-          <div class="about-left">
-            <div class="profile-image-wrapper">
-              <div class="image-glow"></div>
-              <img 
-                :src="profileImage" 
-                alt="Augusto Arand"
-                class="profile-image"
-              />
-            </div>
-            <div class="intro-tags">
-              <div class="intro-tag tag-blue">
-                Estudante de Análise e Desenvolvimento de Sistemas
-              </div>
-              <div class="intro-tag tag-green">
-                Entusiasta por Motos e Tecnologia
-              </div>
-            </div>
+
+    <!-- Bio details card -->
+    <div class="bio-section">
+      <div class="container">
+        <div class="bio-grid">
+          <div class="bio-card experience-card">
+            <div class="bio-card-icon"></div>
+            <h3>Experiência em QA</h3>
+            <p>Testes manuais, automatizados, funcionais, não funcionais, regressão e confirmação. Gestão de bugs com <strong>Jira</strong>, <strong>Azure DevOps</strong> e <strong>GitHub Actions</strong>.</p>
           </div>
-        </a-col>
-        <a-col :xs="24" :md="16">
-          <div class="about-right">
-            <h2 class="section-title">
-              <span class="title-gradient">Sobre Mim</span>
-            </h2>
-            <div class="info-card">
-              <div class="card-decoration"></div>
-              <p class="bio-text">
-                Apaixonado por motos e tecnologia, atualmente cursando <strong>Análise e Desenvolvimento de Sistemas</strong> no Centro Universitário Jorge Amado e atuando como <strong>Estagiário QA</strong> na Tecsinapse.
-              </p>
-              <p class="bio-text">
-                Possuo experiência na execução de testes manuais, automatizados, funcionais e não funcionais, testes de regressão e confirmação. Experiência na gestão e reporte de bugs utilizando ferramentas como <strong>Jira</strong>, <strong>Azure DevOps</strong>, <strong>Github Actions</strong>. Experiência com testes automatizados utilizando <strong>Cypress, RobotFramework, Appium e Selenium</strong>.
-              </p>
-              <p class="bio-text">
-                Experiência em programação full-stack com: <strong>JavaScript, Node.js, React, Vue.js, Next.js, Prisma ORM, Ruby, MongoDB e Postgres </strong>. Experiência em gestão e consulta de banco de dados relacionais (<strong>PostgreSQL, MySQL</strong>). Possuo também certificação <strong>CPRE-FL</strong> (Engenharia de Requisitos - Nível Fundamental) pelo IREB.
-              </p>
-              
-              <div class="highlights">
-                <h4 class="highlights-title">🎯 Destaques</h4>
-                <div class="tags-container">
-                  <div class="highlight-tag">QA</div>
-                  <div class="highlight-tag">Automação</div>
-                  <div class="highlight-tag">DevOps</div>
-                  <div class="highlight-tag">CPRE-FL</div>
-                </div>
-              </div>
-            </div>
+          <div class="bio-card dev-card">
+            <div class="bio-card-icon"></div>
+            <h3>Desenvolvimento Full-Stack</h3>
+            <p>JavaScript, Node.js, React, Vue.js, Next.js, Prisma ORM, Ruby. Banco de dados: <strong>PostgreSQL</strong>, <strong>MySQL</strong>, <strong>MongoDB</strong>.</p>
           </div>
-        </a-col>
-      </a-row>
+          <div class="bio-card cert-card">
+            <div class="bio-card-icon"></div>
+            <h3>Certificações</h3>
+            <p>Certificação <strong>CPRE-FL</strong> (Engenharia de Requisitos — Nível Fundamental) pelo <strong>IREB</strong>. Aprendizado contínuo em CTFL.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </template>
 
 <script>
+import { ArrowRightOutlined, LinkedinOutlined, GithubOutlined } from '@ant-design/icons-vue'
 import profileImage from '../assets/pics/profile-pic.png'
 
 export default {
   name: 'AboutSection',
+  components: { ArrowRightOutlined, LinkedinOutlined, GithubOutlined },
+  setup() {
+    const scrollTo = (id) => {
+      const el = document.getElementById(id)
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+    return { scrollTo }
+  },
   data() {
     return {
-      profileImage
+      profileImage,
+      stats: [
+        { value: '3+',  label: 'Anos de experiência' },
+        { value: '7',   label: 'Projetos concluídos' },
+        { value: '12+', label: 'Tecnologias' },
+        { value: '1',   label: 'Certificação CPRE-FL' },
+      ]
     }
   }
 }
 </script>
 
 <style scoped>
+/* ─── Section shell ──────────────────────────────── */
 .about-section {
+  background: var(--color-bg);
   position: relative;
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0d3d2d 100%);
-  padding: 5rem 0;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
   overflow: hidden;
 }
 
-.section-background {
+/* ─── Hero ───────────────────────────────────────── */
+.hero {
+  padding: 5rem 0 3rem;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 0.1;
+  top: -200px;
+  left: -200px;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(66,185,131,0.08) 0%, transparent 70%);
+  pointer-events: none;
 }
 
-.floating-shapes {
+.hero::after {
+  content: '';
   position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-.shape {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  animation: float 25s infinite ease-in-out;
-}
-
-.shape-1 {
-  width: 400px;
-  height: 400px;
-  top: -150px;
-  left: -150px;
-  animation-delay: 0s;
-}
-
-.shape-2 {
-  width: 300px;
-  height: 300px;
   bottom: -100px;
   right: -100px;
-  animation-delay: 8s;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(66,185,131,0.05) 0%, transparent 70%);
+  pointer-events: none;
 }
 
-.shape-3 {
-  width: 200px;
-  height: 200px;
-  top: 40%;
-  left: 50%;
-  animation-delay: 15s;
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(60px, -60px) scale(1.1);
-  }
-  66% {
-    transform: translate(-40px, 80px) scale(0.9);
-  }
-}
-
-.about-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  width: 100%;
+.hero-content {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4rem;
+  align-items: center;
   position: relative;
   z-index: 1;
-  animation: fadeIn 1s ease-out;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Avatar */
+.hero-left { display: flex; justify-content: center; }
+
+.avatar-ring {
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    #42b983 0%,
+    transparent 40%,
+    transparent 60%,
+    #42b983 100%
+  );
+  padding: 3px;
+  flex-shrink: 0;
+  animation: ring-spin 8s linear infinite;
 }
 
-.about-left {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-  animation: slideInLeft 0.8s ease-out;
+@keyframes ring-spin {
+  to { transform: rotate(360deg); }
 }
 
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.profile-image-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 350px;
-  aspect-ratio: 1;
-  border-radius: 30px;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  border: 6px solid rgba(255, 255, 255, 0.9);
-  transition: transform 0.3s ease;
-}
-
-.profile-image-wrapper:hover {
-  transform: scale(1.05) rotate(2deg);
-}
-
-.image-glow {
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
-  animation: glow 3s ease-in-out infinite;
-}
-
-@keyframes glow {
-  0%, 100% {
-    transform: translate(0, 0);
-    opacity: 0.5;
-  }
-  50% {
-    transform: translate(10%, 10%);
-    opacity: 0.8;
-  }
-}
-
-.profile-image {
+.avatar-img {
   width: 100%;
   height: 100%;
+  border-radius: 50%;
   object-fit: cover;
-  position: relative;
-  z-index: 1;
+  border: 4px solid var(--color-bg);
+  display: block;
 }
 
-.intro-tags {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
-  max-width: 350px;
+/* Hero text */
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(66,185,131,0.1);
+  border: 1px solid rgba(66,185,131,0.25);
+  color: var(--color-green);
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  margin-bottom: 1.5rem;
+  width: fit-content;
 }
 
-.intro-tag {
-  font-size: 0.95rem;
-  padding: 1rem 1.5rem;
-  text-align: center;
-  border-radius: 15px;
-  font-weight: 600;
-  color: white;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-  animation: slideUp 0.8s ease-out;
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-green);
+  animation: pulse 2s ease-in-out infinite;
 }
 
-.intro-tag:nth-child(1) {
-  animation-delay: 0.2s;
-  opacity: 0;
-  animation-fill-mode: forwards;
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(66,185,131,0.6); }
+  50%       { box-shadow: 0 0 0 6px rgba(66,185,131,0); }
 }
 
-.intro-tag:nth-child(2) {
-  animation-delay: 0.4s;
-  opacity: 0;
-  animation-fill-mode: forwards;
+.hero-title {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.03em;
+  color: var(--color-white);
 }
 
-@keyframes slideUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-}
-
-.tag-blue {
-  background: rgba(66, 185, 131, 0.7);
-  box-shadow: 0 4px 15px rgba(66, 185, 131, 0.4);
-  border: 1px solid rgba(66, 185, 131, 0.5);
-}
-
-.tag-blue:hover {
-  background: rgba(66, 185, 131, 0.9);
-  transform: translateY(-3px);
-  box-shadow: 0 6px 25px rgba(66, 185, 131, 0.6);
-}
-
-.tag-green {
-  background: rgba(52, 168, 112, 0.7);
-  box-shadow: 0 4px 15px rgba(52, 168, 112, 0.4);
-  border: 1px solid rgba(52, 168, 112, 0.5);
-}
-
-.tag-green:hover {
-  background: rgba(52, 168, 112, 0.9);
-  transform: translateY(-3px);
-  box-shadow: 0 6px 25px rgba(52, 168, 112, 0.6);
-}
-
-.about-right {
-  display: flex;
-  flex-direction: column;
-  animation: slideInRight 0.8s ease-out;
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.section-title {
-  margin-bottom: 2rem;
-  text-align: left;
-}
-
-.title-gradient {
-  background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+.highlight {
+  background: linear-gradient(135deg, #42b983, #5de0a1);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  font-size: 3rem;
-  font-weight: 700;
-  display: inline-block;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.info-card {
+.hero-tagline {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.01em;
+}
+
+.hero-bio {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--color-text-muted);
+  max-width: 580px;
+  margin-bottom: 1.5rem;
+}
+
+.hero-bio strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+/* Tags */
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.tag {
+  padding: 0.35rem 0.85rem;
+  border-radius: 50px;
+  border: 1px solid var(--color-border);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  transition: all 0.2s ease;
+  background: var(--color-bg-card);
+}
+
+.tag:hover {
+  border-color: var(--color-green);
+  color: var(--color-green);
+  background: var(--color-green-dim);
+}
+
+/* Action buttons */
+.hero-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--color-green);
+  color: white;
+  box-shadow: 0 4px 20px rgba(66,185,131,0.3);
+}
+
+.btn-primary:hover {
+  background: #5de0a1;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(66,185,131,0.45);
+}
+
+.btn-ghost {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+.btn-ghost:hover {
+  border-color: var(--color-green);
+  color: var(--color-green);
+  background: var(--color-green-dim);
+}
+
+/* ─── Stats row ──────────────────────────────────── */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--color-border);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-top: 4rem;
   position: relative;
-  background: white;
-  border-radius: 25px;
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
-  padding: 2.5rem;
-  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+.stat-item {
+  background: var(--color-bg-card);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: center;
+  text-align: center;
+  transition: background 0.2s ease;
+}
+
+.stat-item:hover { background: rgba(66,185,131,0.06); }
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--color-green);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+/* ─── Bio section ────────────────────────────────── */
+.bio-section {
+  background: var(--color-bg-alt);
+  padding: 4rem 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.bio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.bio-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  transition: all 0.3s ease;
+  position: relative;
   overflow: hidden;
 }
 
-.info-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
-}
-
-.card-decoration {
+.bio-card::before {
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 6px;
-  background: linear-gradient(90deg, #42b983 0%, #34a870 50%, #2d9361 100%);
+  height: 3px;
+  background: linear-gradient(90deg, #42b983, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.bio-text {
-  font-size: 1.05rem;
-  line-height: 1.8;
-  color: #555;
-  margin-bottom: 1.5rem;
+.bio-card:hover {
+  border-color: rgba(66,185,131,0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
 }
 
-.bio-text strong {
-  color: #42b983;
-  font-weight: 600;
-}
+.bio-card:hover::before { opacity: 1; }
 
-.highlights {
-  margin-top: 2rem;
-  background: linear-gradient(135deg, rgba(66, 185, 131, 0.1) 0%, rgba(52, 168, 112, 0.1) 100%);
-  padding: 1.5rem;
-  border-radius: 15px;
-  border: 2px solid rgba(66, 185, 131, 0.3);
-}
-
-.highlights-title {
-  color: #2c3e50;
+.bio-card-icon {
+  font-size: 2rem;
   margin-bottom: 1rem;
-  font-size: 1.3rem;
 }
 
-.tags-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  align-items: center;
+.bio-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: 0.75rem;
 }
 
-.highlight-tag {
-  flex: 0 0 auto;
-  background: linear-gradient(135deg, #42b983 0%, #34a870 100%);
-  color: white;
-  font-size: 1rem;
-  padding: 0.8rem 1.5rem;
-  border-radius: 20px;
+.bio-card p {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+.bio-card p strong {
+  color: var(--color-text);
   font-weight: 600;
-  box-shadow: 0 4px 15px rgba(66, 185, 131, 0.4);
-  transition: all 0.3s ease;
-  white-space: nowrap;
 }
 
-.highlight-tag:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(66, 185, 131, 0.6);
-}
+/* ─── Responsive ─────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2.5rem;
+  }
 
+  .hero-left { order: -1; }
+
+  .avatar-ring {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto;
+  }
+
+  .hero-eyebrow { margin: 0 auto 1.5rem; }
+  .hero-bio { margin: 0 auto 1.5rem; }
+  .hero-tags, .hero-actions { justify-content: center; }
+
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+}
 
 @media (max-width: 768px) {
-  .about-section {
-    padding: 3rem 0;
-    min-height: auto;
-  }
-  
-  .about-container {
-    padding: 0 1rem;
-  }
-  
-  .title-gradient {
-    font-size: 2rem;
-    text-align: center;
-  }
-  
-  .section-title {
-    text-align: center;
-  }
-  
-  .profile-image-wrapper {
-    max-width: 280px;
-  }
-  
-  .info-card {
-    padding: 1.5rem;
-  }
-  
-  .bio-text {
-    font-size: 1rem;
-  }
+  .bio-grid { grid-template-columns: 1fr; }
+  .hero { padding: 3rem 0 2rem; }
+}
+
+@media (max-width: 480px) {
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .stat-value { font-size: 2rem; }
 }
 </style>

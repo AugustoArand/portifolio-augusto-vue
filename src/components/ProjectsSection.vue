@@ -1,82 +1,70 @@
 <template>
   <section id="projects" class="projects-section">
-    <div class="section-background">
-      <div class="floating-shapes">
-        <div class="shape shape-1"></div>
-        <div class="shape shape-2"></div>
-        <div class="shape shape-3"></div>
-      </div>
-    </div>
-    
-    <div class="projects-container">
+    <div class="container">
       <div class="section-header">
-        <h2 class="section-title">
-          <span class="title-gradient">Projetos</span>
-        </h2>
+        <p class="section-eyebrow">Portfólio</p>
+        <h2 class="section-title">Projetos em Destaque</h2>
         <p class="section-subtitle">
           Conheça alguns dos projetos que desenvolvi ao longo da minha jornada
         </p>
       </div>
-      
-      <a-row :gutter="[32, 32]">
-        <a-col 
-          v-for="(project, index) in displayedProjects" 
-          :key="project.title" 
-          :xs="24" 
-          :sm="12" 
-          :lg="6"
-          class="project-col"
+
+      <!-- Featured project (first, larger) -->
+      <div v-if="projects.length" class="featured-project" >
+        <div class="featured-image-wrap">
+          <img :src="projects[0].image" :alt="projects[0].title" class="featured-img" />
+          <div class="featured-overlay">
+            <a :href="projects[0].link" target="_blank" class="overlay-btn">
+              <EyeOutlined /> Ver Projeto
+            </a>
+          </div>
+        </div>
+        <div class="featured-info">
+          <span class="featured-tag">⭐ Destaque</span>
+          <h3 class="featured-title">{{ projects[0].title }}</h3>
+          <p class="featured-desc">{{ projects[0].description }}</p>
+          <div class="project-tags">
+            <span v-for="t in projects[0].tags" :key="t" class="tech-tag">{{ t }}</span>
+          </div>
+          <a :href="projects[0].link" target="_blank" class="featured-link">
+            Acessar Projeto <ArrowRightOutlined />
+          </a>
+        </div>
+      </div>
+
+      <!-- Supporting projects grid -->
+      <div class="projects-grid">
+        <div
+          v-for="(project, index) in displayedProjects"
+          :key="project.title"
+          class="project-card"
+          :style="{ animationDelay: `${index * 0.08}s` }"
         >
-          <div class="project-card" :style="{ animationDelay: `${index * 0.1}s` }">
-            <div class="project-image-container">
-              <img :src="project.image" :alt="project.title" class="project-image" />
-              <div class="project-overlay">
-                <a 
-                  :href="project.link" 
-                  target="_blank"
-                  class="view-project-btn"
-                >
-                  <EyeOutlined class="btn-icon" /> Ver Projeto
-                </a>
-              </div>
-            </div>
-            
-            <div class="project-content">
-              <div class="project-icon">
-                <ProjectOutlined />
-              </div>
-              <h3 class="project-title">{{ project.title }}</h3>
-              <p class="project-description">{{ project.description }}</p>
-              
-              <div class="project-tags">
-                <span 
-                  v-for="tag in project.tags" 
-                  :key="tag" 
-                  class="tech-tag"
-                >
-                  {{ tag }}
-                </span>
-              </div>
-              
-              <a 
-                :href="project.link" 
-                target="_blank"
-                class="project-link"
-              >
-                Acessar projeto <ArrowRightOutlined class="arrow-icon" />
+          <div class="card-image-wrap">
+            <img :src="project.image" :alt="project.title" class="card-img" />
+            <div class="card-overlay">
+              <a :href="project.link" target="_blank" class="overlay-icon-btn">
+                <EyeOutlined />
               </a>
             </div>
           </div>
-        </a-col>
-      </a-row>
-      
-      <div v-if="projects.length > 4" class="view-all-container">
-        <button 
-          class="view-all-btn"
-          @click="$router.push('/projetos')"
-        >
-          Ver Todos os Projetos ({{ projects.length }})
-          <ArrowRightOutlined class="btn-arrow" />
+          <div class="card-body">
+            <div class="project-tags">
+              <span v-for="t in project.tags" :key="t" class="tech-tag">{{ t }}</span>
+            </div>
+            <h3 class="card-title">{{ project.title }}</h3>
+            <p class="card-desc">{{ project.description }}</p>
+            <a :href="project.link" target="_blank" class="card-link">
+              Ver projeto <ArrowRightOutlined />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div v-if="projects.length > 4" class="view-all-wrap">
+        <button class="view-all-btn" @click="$router.push('/projetos')">
+          Ver todos os projetos ({{ projects.length }})
+          <ArrowRightOutlined />
         </button>
       </div>
     </div>
@@ -84,7 +72,7 @@
 </template>
 
 <script>
-import { ProjectOutlined, ArrowRightOutlined, EyeOutlined } from '@ant-design/icons-vue'
+import { ArrowRightOutlined, EyeOutlined, ProjectOutlined } from '@ant-design/icons-vue'
 import maptyImage from '../assets/pics/mapty.PNG'
 import pigGameImage from '../assets/pics/pig-game.PNG'
 import guessNumberImage from '../assets/pics/guess-my-number.PNG'
@@ -95,24 +83,20 @@ import sistemaCondominioImage from '../assets/pics/cond-agend.png'
 
 export default {
   name: 'ProjectsSection',
-  components: {
-    ProjectOutlined,
-    ArrowRightOutlined,
-    EyeOutlined
-  },
+  components: { ArrowRightOutlined, EyeOutlined, ProjectOutlined },
   data() {
     return {
       projects: [
         {
           title: 'Sistema de Gerenciamento de Condomínios',
-          description: 'Sistema real desenvolvido para o gerenciamento dos espaços do condominio e centralização de comunicados importantes',
+          description: 'Sistema real desenvolvido para o gerenciamento dos espaços do condomínio e centralização de comunicados importantes.',
           image: sistemaCondominioImage,
           tags: ['Vue.js', 'MongoDB', 'Express', 'Node.js'],
           link: 'https://agendamento-estrela-do-sol.vercel.app'
         },
         {
-          title: 'Gerenciador de Exericios',
-          description: 'Sistema de gerenciamento de atividades fisicas com a biblioteca de geolocalização Leaflet.js',
+          title: 'Gerenciador de Exercícios',
+          description: 'Sistema de gerenciamento de atividades físicas com a biblioteca de geolocalização Leaflet.js.',
           image: maptyImage,
           tags: ['Javascript', 'CSS', 'HTML'],
           link: 'https://augustoarand.github.io/mapty-exercise/'
@@ -126,119 +110,47 @@ export default {
         },
         {
           title: 'Pig Game',
-          description: 'Um mini game desenvolvido em através de JS, HTML e CSS',
+          description: 'Um mini game desenvolvido através de JS, HTML e CSS.',
           image: pigGameImage,
           tags: ['Javascript', 'CSS', 'HTML'],
           link: 'https://augustoarand.github.io/pig-game/'
         },
         {
           title: 'Guess My Number',
-          description: 'Um mini game desenvolvido em através de JS, HTML e CSS.',
+          description: 'Um mini game desenvolvido através de JS, HTML e CSS.',
           image: guessNumberImage,
           tags: ['Javascript', 'CSS', 'HTML'],
           link: 'https://augustoarand.github.io/guess-my-number/'
         },
         {
           title: 'AirBNB Demo',
-          description: 'Projeto desenvolvido em React + Next.js consumindo a API pública da própria Airbnb',
+          description: 'Projeto desenvolvido em React + Next.js consumindo a API pública da Airbnb.',
           image: airBnbDemoImage,
           tags: ['React', 'Next.js'],
           link: '#'
         },
         {
           title: 'Simulador Conta Bancária',
-          description: 'Desenvolvido em JS | CSS e HTML',
+          description: 'Desenvolvido em JS, CSS e HTML.',
           image: simuladorBancoImage,
           tags: ['Javascript', 'CSS', 'HTML'],
           link: 'https://augustoarand.github.io/Bank-App/'
         },
-        
       ]
     }
   },
   computed: {
-    displayedProjects() {
-      return this.projects.slice(0, 4)
-    }
+    // Projects 1..4 for the supporting grid (after the featured [0])
+    displayedProjects() { return this.projects.slice(1, 5) }
   }
 }
 </script>
 
 <style scoped>
 .projects-section {
-  position: relative;
-  background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 50%, #0d3d2d 100%);
-  padding: 5rem 0;
-  overflow: hidden;
-}
-
-.section-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 0.1;
-}
-
-.floating-shapes {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-.shape {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  animation: float 22s infinite ease-in-out;
-}
-
-.shape-1 {
-  width: 280px;
-  height: 280px;
-  top: -80px;
-  right: -80px;
-  animation-delay: 0s;
-}
-
-.shape-2 {
-  width: 220px;
-  height: 220px;
-  bottom: -60px;
-  left: 10%;
-  animation-delay: 7s;
-}
-
-.shape-3 {
-  width: 180px;
-  height: 180px;
-  top: 30%;
-  left: -60px;
-  animation-delay: 14s;
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translate(0, 0) rotate(0deg);
-  }
-  25% {
-    transform: translate(40px, 40px) rotate(90deg);
-  }
-  50% {
-    transform: translate(0, 80px) rotate(180deg);
-  }
-  75% {
-    transform: translate(-40px, 40px) rotate(270deg);
-  }
-}
-
-.projects-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  position: relative;
-  z-index: 1;
+  background: var(--color-bg-alt);
+  padding: 6rem 0;
+  border-top: 1px solid var(--color-border);
 }
 
 .section-header {
@@ -246,86 +158,67 @@ export default {
   margin-bottom: 4rem;
 }
 
-.section-title {
-  margin-bottom: 1rem;
+.section-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-green);
+  margin-bottom: 0.75rem;
 }
 
-.title-gradient {
-  background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-size: 3rem;
-  font-weight: 700;
-  display: inline-block;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+.section-title {
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-white);
+  margin-bottom: 0.75rem;
 }
 
 .section-subtitle {
-  color: rgba(255, 255, 255, 0.95);
-  font-size: 1.2rem;
-  max-width: 600px;
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  max-width: 520px;
   margin: 0 auto;
 }
 
-.project-col {
-  animation: fadeInUp 0.8s ease-out forwards;
-  opacity: 0;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.project-card {
-  background: white;
-  border-radius: 20px;
+/* ─── Featured ─────────────────────────────────── */
+.featured-project {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 2.5rem;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
   overflow: hidden;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  margin-bottom: 2rem;
+  transition: border-color 0.3s ease;
 }
 
-.project-card:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 20px 60px rgba(66, 185, 131, 0.4);
+.featured-project:hover {
+  border-color: rgba(66,185,131,0.3);
 }
 
-.project-image-container {
+.featured-image-wrap {
   position: relative;
-  width: 100%;
-  height: 240px;
   overflow: hidden;
-  background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+  min-height: 320px;
 }
 
-.project-image {
+.featured-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
+  transition: transform 0.5s ease;
+  display: block;
 }
 
-.project-card:hover .project-image {
-  transform: scale(1.15);
-}
+.featured-project:hover .featured-img { transform: scale(1.04); }
 
-.project-overlay {
+.featured-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(66, 185, 131, 0.85) 100%);
+  inset: 0;
+  background: rgba(8,8,8,0.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -333,211 +226,254 @@ export default {
   transition: opacity 0.3s ease;
 }
 
-.project-card:hover .project-overlay {
-  opacity: 1;
-}
+.featured-project:hover .featured-overlay { opacity: 1; }
 
-.view-project-btn {
-  background: linear-gradient(135deg, #42b983 0%, #34a870 100%);
-  color: white;
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 50px;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.overlay-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  background: var(--color-green);
+  color: white;
+  border-radius: 50px;
+  font-weight: 700;
   text-decoration: none;
-  box-shadow: 0 4px 15px rgba(66, 185, 131, 0.4);
+  font-size: 0.95rem;
+  transition: transform 0.2s ease;
 }
 
-.view-project-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 25px rgba(66, 185, 131, 0.6);
-  background: linear-gradient(135deg, #34a870 0%, #2d9361 100%);
-}
+.overlay-btn:hover { transform: scale(1.05); color: white; }
 
-.btn-icon {
-  font-size: 1.2rem;
-}
-
-.project-content {
-  padding: 2rem;
-  flex-grow: 1;
+.featured-info {
+  padding: 2.5rem 2.5rem 2.5rem 0;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
 }
 
-.project-icon {
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(135deg, #42b983 0%, #34a870 100%);
-  border-radius: 12px;
+.featured-tag {
+  display: inline-flex;
+  padding: 0.3rem 0.8rem;
+  border-radius: 50px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background: var(--color-green-dim);
+  border: 1px solid rgba(66,185,131,0.3);
+  color: var(--color-green);
+  width: fit-content;
+}
+
+.featured-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--color-white);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.featured-desc {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+.featured-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  color: var(--color-green);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: gap 0.2s ease;
+}
+
+.featured-link:hover { gap: 0.9rem; color: #5de0a1; }
+
+/* ─── Grid ─────────────────────────────────────── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.project-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.6s ease-out both;
+}
+
+.project-card:hover {
+  border-color: rgba(66,185,131,0.3);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(0,0,0,0.4);
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.card-image-wrap {
+  position: relative;
+  overflow: hidden;
+  height: 180px;
+  background: var(--color-bg);
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.project-card:hover .card-img { transform: scale(1.1); }
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(8,8,8,0.75);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-card:hover .card-overlay { opacity: 1; }
+
+.overlay-icon-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-green);
   color: white;
-  margin-bottom: 1rem;
-  transition: transform 0.3s ease;
-}
-
-.project-card:hover .project-icon {
-  transform: rotate(360deg);
-}
-
-.project-title {
-  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 1.25rem;
-  margin-bottom: 1rem;
-  font-weight: 700;
-  line-height: 1.4;
-  min-height: 3.5rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  text-decoration: none;
+  transition: transform 0.2s;
 }
 
-.project-description {
-  color: #666;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-  flex-grow: 1;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+.overlay-icon-btn:hover { transform: scale(1.15); color: white; }
+
+.card-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  flex: 1;
 }
 
 .project-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  gap: 0.4rem;
 }
 
 .tech-tag {
-  background: linear-gradient(135deg, rgba(66, 185, 131, 0.15) 0%, rgba(52, 168, 112, 0.15) 100%);
-  color: #42b983;
-  border: 1px solid rgba(66, 185, 131, 0.3);
-  border-radius: 20px;
-  font-size: 0.85rem;
-  padding: 0.4rem 1rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
   font-weight: 600;
-  transition: all 0.3s ease;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  background: var(--color-bg-card);
+  transition: all 0.2s ease;
 }
 
 .tech-tag:hover {
-  background: linear-gradient(135deg, #42b983 0%, #34a870 100%);
-  color: white;
-  transform: translateY(-2px);
+  border-color: var(--color-green);
+  color: var(--color-green);
+  background: var(--color-green-dim);
 }
 
-.project-link {
-  color: #42b983;
-  font-weight: 700;
+.card-title {
   font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-white);
+  line-height: 1.4;
+}
+
+.card-desc {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 1;
+}
+
+.card-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  transition: all 0.3s ease;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-green);
   text-decoration: none;
   margin-top: auto;
-  padding-top: 1rem;
-  border-top: 1px solid #eee;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-border);
+  transition: gap 0.2s;
 }
 
-.project-link:hover {
-  color: #34a870;
-  gap: 1rem;
-}
+.card-link:hover { gap: 0.75rem; color: #5de0a1; }
 
-.arrow-icon {
-  transition: transform 0.3s ease;
-}
-
-.project-link:hover .arrow-icon {
-  transform: translateX(5px);
-}
-
-.view-all-container {
+/* ─── View All ─────────────────────────────────── */
+.view-all-wrap {
   display: flex;
   justify-content: center;
-  margin-top: 4rem;
+  margin-top: 2.5rem;
 }
 
 .view-all-btn {
-  background: linear-gradient(135deg, #42b983 0%, #34a870 100%);
-  color: white;
-  border: none;
-  padding: 1.2rem 3rem;
-  font-size: 1.1rem;
-  font-weight: 700;
-  border-radius: 50px;
-  box-shadow: 0 8px 30px rgba(66, 185, 131, 0.3);
-  transition: all 0.3s ease;
-  cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
+  padding: 0.85rem 2.5rem;
+  border-radius: 50px;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: var(--font-body);
 }
 
 .view-all-btn:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 40px rgba(66, 185, 131, 0.5);
-  background: linear-gradient(135deg, #34a870 0%, #2d9361 100%);
+  border-color: var(--color-green);
+  color: var(--color-green);
+  background: var(--color-green-dim);
 }
 
-.btn-arrow {
-  transition: transform 0.3s ease;
-  font-size: 1.2rem;
+/* ─── Responsive ────────────────────────────────── */
+@media (max-width: 1100px) {
+  .projects-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-.view-all-btn:hover .btn-arrow {
-  transform: translateX(5px);
+@media (max-width: 900px) {
+  .featured-project { grid-template-columns: 1fr; }
+  .featured-image-wrap { min-height: 240px; }
+  .featured-info { padding: 1.5rem; }
+  .featured-title { font-size: 1.4rem; }
 }
 
-@media (max-width: 768px) {
-  .projects-section {
-    padding: 3rem 0;
-  }
-  
-  .projects-container {
-    padding: 0 1rem;
-  }
-
-  .section-header {
-    margin-bottom: 2.5rem;
-  }
-  
-  .title-gradient {
-    font-size: 2rem;
-  }
-
-  .section-subtitle {
-    font-size: 1rem;
-  }
-  
-  .project-image-container {
-    height: 200px;
-  }
-
-  .project-content {
-    padding: 1.5rem;
-  }
-  
-  .project-title {
-    min-height: auto;
-    font-size: 1.1rem;
-  }
-  
-  .project-description {
-    min-height: auto;
-  }
+@media (max-width: 640px) {
+  .projects-grid { grid-template-columns: 1fr; }
+  .featured-project { border-radius: var(--radius-lg); }
 }
 </style>

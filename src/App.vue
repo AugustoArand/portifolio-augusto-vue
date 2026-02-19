@@ -4,7 +4,9 @@
       token: {
         colorPrimary: '#42b983',
         borderRadius: 8,
+        fontFamily: 'Inter, system-ui, sans-serif',
       },
+      algorithm: darkAlgorithm,
     }"
   >
     <a-layout id="app">
@@ -28,15 +30,15 @@
 
 <script>
 import { ArrowUpOutlined } from '@ant-design/icons-vue'
+import { theme } from 'ant-design-vue'
 import HeaderComponent from './components/HeaderComponent.vue'
 import FooterComponent from './components/FooterComponent.vue'
 
 export default {
   name: 'App',
-  components: {
-    ArrowUpOutlined,
-    HeaderComponent,
-    FooterComponent
+  components: { ArrowUpOutlined, HeaderComponent, FooterComponent },
+  setup() {
+    return { darkAlgorithm: theme.darkAlgorithm }
   }
 }
 </script>
@@ -44,23 +46,26 @@ export default {
 <style>
 #app {
   min-height: 100vh;
+  background: var(--color-bg);
 }
 
 .back-to-top {
-  width: 50px;
-  height: 50px;
-  line-height: 50px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background-color: #42b983;
+  background: var(--color-green);
   color: white;
-  text-align: center;
-  font-size: 24px;
-  box-shadow: 0 4px 12px rgba(66, 185, 131, 0.4);
-  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 20px rgba(66, 185, 131, 0.4);
+  transition: all 0.25s ease;
 }
 
 .back-to-top:hover {
-  background-color: #34a870;
-  transform: scale(1.1);
+  background: #5de0a1;
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 8px 28px rgba(66, 185, 131, 0.5);
 }
 </style>

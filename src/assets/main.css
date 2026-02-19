@@ -1,98 +1,108 @@
-* {
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ─── CSS Tokens ──────────────────────────────────────────── */
+:root {
+  /* Colors */
+  --color-bg:        #080808;
+  --color-bg-alt:    #0f1117;
+  --color-bg-card:   rgba(255, 255, 255, 0.04);
+  --color-border:    rgba(255, 255, 255, 0.08);
+  --color-green:     #42b983;
+  --color-green-dim: rgba(66, 185, 131, 0.15);
+  --color-green-glow: rgba(66, 185, 131, 0.35);
+  --color-text:      #e8eaf0;
+  --color-text-muted:#8a94a6;
+  --color-white:     #ffffff;
+
+  /* Typography */
+  --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+
+  /* Spacing */
+  --section-pad: 6rem 0;
+  --container:   1320px;
+  --radius-sm:   8px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
+  --radius-xl:   32px;
+
+  /* Shadows */
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow-hover: 0 12px 48px rgba(66,185,131,0.2);
+  --shadow-glow:  0 0 40px rgba(66,185,131,0.15);
+}
+
+/* ─── Reset ───────────────────────────────────────────────── */
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
   line-height: 1.6;
-  color: #333;
-  background-color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #app {
   min-height: 100vh;
 }
 
+/* ─── Typography ──────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  color: var(--color-white);
+}
+
+p { color: var(--color-text-muted); }
+
+a {
+  color: var(--color-green);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover { color: #5de0a1; }
+
+/* ─── Layout ──────────────────────────────────────────────── */
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
 section {
-  padding: 60px 20px;
+  padding: var(--section-pad);
   width: 100%;
 }
 
-h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: #2c3e50;
-}
+/* ─── Ant Design Overrides ────────────────────────────────── */
+.ant-layout { background: var(--color-bg); }
+.ant-layout-header { background: transparent; }
+.ant-layout-content { background: transparent; }
+.ant-layout-footer  { background: transparent; }
 
-h2 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  text-align: center;
-  color: #2c3e50;
+/* ─── Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb {
+  background: rgba(66, 185, 131, 0.4);
+  border-radius: 3px;
 }
+::-webkit-scrollbar-thumb:hover { background: var(--color-green); }
 
-h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: #34495e;
-}
-
-p {
-  margin-bottom: 1rem;
-  color: #555;
-}
-
-a {
-  color: #42b983;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-a:hover {
-  color: #34a870;
-}
-
-button {
-  background-color: #42b983;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #34a870;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Ant Design customization */
-.ant-layout {
-  background: transparent;
-}
-
-.ant-layout-header {
-  background: transparent;
-}
-
-.ant-layout-content {
-  background: transparent;
-}
-
-.ant-layout-footer {
-  background: transparent;
+/* ─── Selection ───────────────────────────────────────────── */
+::selection {
+  background: var(--color-green-dim);
+  color: var(--color-green);
 }
