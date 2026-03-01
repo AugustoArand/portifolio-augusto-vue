@@ -176,20 +176,26 @@ export default {
   width: 240px;
   height: 240px;
   border-radius: 50%;
-  background: conic-gradient(
-    from 0deg,
-    #42b983 0%,
-    transparent 40%,
-    transparent 60%,
-    #42b983 100%
-  );
+  background: linear-gradient(135deg, #42b983 0%, #2d8f63 50%, #42b983 100%);
   padding: 3px;
   flex-shrink: 0;
-  animation: ring-spin 8s linear infinite;
+  animation: avatar-glow 3s ease-in-out infinite;
+  box-shadow:
+    0 0 0 0 rgba(66, 185, 131, 0.5),
+    0 8px 40px rgba(66, 185, 131, 0.2);
 }
 
-@keyframes ring-spin {
-  to { transform: rotate(360deg); }
+@keyframes avatar-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 12px 2px rgba(66, 185, 131, 0.35),
+      0 8px 40px rgba(66, 185, 131, 0.15);
+  }
+  50% {
+    box-shadow:
+      0 0 28px 8px rgba(66, 185, 131, 0.55),
+      0 12px 50px rgba(66, 185, 131, 0.3);
+  }
 }
 
 .avatar-img {
@@ -199,6 +205,11 @@ export default {
   object-fit: cover;
   border: 4px solid var(--color-bg);
   display: block;
+  transition: transform 0.4s ease;
+}
+
+.avatar-ring:hover .avatar-img {
+  transform: scale(1.04);
 }
 
 /* Hero text */
