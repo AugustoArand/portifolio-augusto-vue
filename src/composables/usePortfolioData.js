@@ -25,6 +25,8 @@ import jmeterIcon from '../assets/pics/jmeter.png'
 import jiraIcon from '../assets/pics/jira.png'
 import gitHubIcon from '../assets/pics/github-logo.png'
 import grafanaIcon from '../assets/pics/grafana-icon.png'
+import redisIcon from '../assets/pics/Redis-Logo.png'
+import playwrightIcon from '../assets/pics/playwright-logo.png'
 
 // ── Mapas de resolução ────────────────────────────────────────────────────────
 export const imageMap = {
@@ -52,6 +54,8 @@ export const iconMap = {
   jira: jiraIcon,
   github: gitHubIcon,
   grafana: grafanaIcon,
+  redis: redisIcon,
+  playwright: playwrightIcon,
 }
 
 // ── Labels legíveis para os iconKeys (usado no admin) ────────────────────────
@@ -70,46 +74,49 @@ export const iconLabels = {
   jira: 'Jira',
   github: 'GitHub Actions',
   grafana: 'Grafana',
+  playwright: 'Playwright',
+  redis: 'Redis',
 }
 
-// ── Persistência ──────────────────────────────────────────────────────────────
-const STORAGE_KEY = 'portfolio_data'
+// ── Configuração da API ───────────────────────────────────────────────────────
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api'
 
-function deepClone(obj) {
-  return JSON.parse(JSON.stringify(obj))
-}
-
-function loadData() {
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY)
-    if (saved) return JSON.parse(saved)
-  } catch (e) {
-    console.warn('usePortfolioData: falha ao ler localStorage', e)
-  }
-  return deepClone(defaultData)
+async function apiFetch(path, options = {}) {
+  const res = await fetch(`${API_URL}${path}`, {
+    headers: { 'Content-Type': 'application/json' },
+    ...options,
+  })
+  if (!res.ok) throw new Error(`Erro na API: ${res.status}`)
+  return res.json()
 }
 
 // ── Estado singleton (reativo em toda a app) ──────────────────────────────────
-const state = reactive(loadData())
+const state = reactive({ ...defaultData, _loaded: false })
 
-function saveToStorage() {
+async function loadFromApi() {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
-  } catch (e) {
-    console.error('usePortfolioData: falha ao salvar localStorage', e)
+    const data = await apiFetch('/portfolio')
+    Object.assign(state, data)
+  } catch (err) {
+    console.warn('usePortfolioData: API indisponível, usando dados padrão', err.message)
+  } finally {
+    state._loaded = true
   }
 }
+
+// Carrega os dados ao inicializar
+loadFromApi()
 
 // ── Dados resolvidos (com imagens/ícones reais) ───────────────────────────────
 const portfolioData = computed(() => ({
   about: state.about,
-  projects: state.projects.map((p) => ({
+  projects: (state.projects || []).map((p) => ({
     ...p,
     image: p.imageUrl || imageMap[p.imageKey] || '',
   })),
-  stacks: state.stacks.map((g) => ({
+  stacks: (state.stacks || []).map((g) => ({
     ...g,
-    stacks: g.stacks.map((s) => ({
+    stacks: (g.stacks || []).map((s) => ({
       ...s,
       icon: s.iconUrl || iconMap[s.iconKey] || '',
     })),
@@ -124,39 +131,49 @@ export function usePortfolioData() {
     portfolioData,
     state,
 
-    updateAbout(data) {
-      Object.assign(state.about, data)
-      saveToStorage()
+    async updateAbout(data) {
+      const updated = await apiFetch('/portfolio/about', {
+        method: 'PUT',
+        body: JSON.stringify(data),
+      })
+      Object.assign(state.about, updated)
     },
 
-    updateProjects(projects) {
-      state.projects = projects
-      saveToStorage()
+    async updateProjects(projects) {
+      const updated = await apiFetch('/portfolio/projects', {
+        method: 'PUT',
+        body: JSON.stringify(projects),
+      })
+      state.projects = updated
     },
 
-    updateStacks(stacks) {
-      state.stacks = stacks
-      saveToStorage()
+    async updateStacks(stacks) {
+      const updated = await apiFetch('/portfolio/stacks', {
+        method: 'PUT',
+        body: JSON.stringify(stacks),
+      })
+      state.stacks = updated
     },
 
-    updateArticles(articles) {
-      state.articles = articles
-      saveToStorage()
+    async updateArticles(articles) {
+      const updated = await apiFetch('/portfolio/articles', {
+        method: 'PUT',
+        body: JSON.stringify(articles),
+      })
+      state.articles = updated
     },
 
-    updateContact(data) {
-      Object.assign(state.contact, data)
-      saveToStorage()
+    async updateContact(data) {
+      const updated = await apiFetch('/portfolio/contact', {
+        method: 'PUT',
+        body: JSON.stringify(data),
+      })
+      Object.assign(state.contact, updated)
     },
 
-    resetToDefault() {
-      localStorage.removeItem(STORAGE_KEY)
-      const fresh = deepClone(defaultData)
-      state.about = fresh.about
-      state.projects = fresh.projects
-      state.stacks = fresh.stacks
-      state.articles = fresh.articles
-      state.contact = fresh.contact
+    async resetToDefault() {
+      const data = await apiFetch('/portfolio/reset', { method: 'POST' })
+      Object.assign(state, data)
     },
 
     imageMap,

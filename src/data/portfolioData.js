@@ -113,6 +113,7 @@ export const defaultData = {
         { name: 'Cypress', iconKey: 'cypress', level: 78 },
         { name: 'Postman', iconKey: 'postman', level: 92 },
         { name: 'Jmeter', iconKey: 'jmeter', level: 92 },
+        { name: 'Playwright', iconKey: 'playwright', level: 40 }
       ],
     },
     {
@@ -123,6 +124,8 @@ export const defaultData = {
         { name: 'Jira', iconKey: 'jira', level: 92 },
         { name: 'Github Actions', iconKey: 'github', level: 85 },
         { name: 'Grafana', iconKey: 'grafana', level: 70 },
+        { name: 'Redis', iconKey: 'redis', level: 50 },
+
       ],
     },
   ],
@@ -130,6 +133,17 @@ export const defaultData = {
   articles: [
     {
       id: 1,
+      title:
+        'QA Fullstack: O que é esperado de um QA em Tempos de Simbiose entre Dev e IA?',
+      excerpt:
+        'Mais um artigo de meus devaneios de fim de semana, onde gostaria de deixar uma reflexão também.',
+      date: '13 Fev 2026',
+      category: 'Qualidade de Software',
+      readingTime: '5 min',
+      link: 'https://www.linkedin.com/posts/augusto-arandiba-b26b90105_mais-um-artigo-de-meus-devaneios-de-fim-de-activity-7441322726947991552-yHT1?utm_source=share&utm_medium=member_desktop&rcm=ACoAABqxc04BaZOpDNFb1PA22h--uhox89C3GII',
+    },
+    {
+      id: 2,
       title:
         'Entre a Angústia de Heidegger e o Front-end: O que a filosofia ensina sobre aprender o novo.',
       excerpt:
@@ -140,7 +154,7 @@ export const defaultData = {
       link: 'https://www.linkedin.com/posts/augusto-arandiba-b26b90105_voc%C3%AA-j%C3%A1-sentiu-que-o-destino-te-lan%C3%A7ou-activity-7427915010812616704-e9YM?utm_source=share&utm_medium=member_desktop&rcm=ACoAABqxc04BaZOpDNFb1PA22h--uhox89C3GII',
     },
     {
-      id: 2,
+      id: 3,
       title:
         'Dose Diária de CPRE-FL - Cap. 02 PRINCIPIOS FUNDAMENTAIS DA ENGENHARIA DE REQUISITOS',
       excerpt:
@@ -151,7 +165,7 @@ export const defaultData = {
       link: 'https://www.linkedin.com/analytics/post-summary/urn:li:activity:7404692249500151808/?skipRedirect=true',
     },
     {
-      id: 3,
+      id: 4,
       title: 'Dose Diária de CTFL Tester Foundation - Cap. 06 - Ferramentas de Teste',
       excerpt:
         'Neste artigo exploramos as principais ferramentas de teste segundo o CTFL Foundation Level',
@@ -161,7 +175,7 @@ export const defaultData = {
       link: 'https://www.linkedin.com/pulse/dose-diária-de-ctfl-tester-foundation-cap-06-teste-arandiba-e7fff/',
     },
     {
-      id: 4,
+      id: 5,
       title: 'Dose Diária de CTFL Tester Foundation - Cap. 04 - Análise e Modelagem de Teste',
       excerpt:
         'Nesta etapa crucial do ciclo de vida de testes, o foco é em compreender, estruturar e desenhar a estratégia.',
@@ -171,7 +185,7 @@ export const defaultData = {
       link: 'https://www.linkedin.com/pulse/dose-diária-de-ctfl-tester-foundation-cap-04-análise-arandiba-4y5bf/',
     },
     {
-      id: 5,
+      id: 6,
       title: 'Dose Diária de CTFL Agile Tester - Cap. 02 - Principios do Teste Ágil',
       excerpt:
         'Atividades de Teste e Desenvolvimento no contexto ágil e seus produtos de trabalho.',
@@ -181,7 +195,7 @@ export const defaultData = {
       link: 'https://www.linkedin.com/analytics/post-summary/urn:li:activity:7381144621973766146/?skipRedirect=true',
     },
     {
-      id: 6,
+      id: 7,
       title: 'Dose Diária de CTFL Tester Foundation - Cap. 02 - Tipos de Teste.',
       excerpt:
         'Os níveis de teste no CTFL Syllabus são etapas completamente distintas dentro do processo de teste.',
@@ -191,7 +205,7 @@ export const defaultData = {
       link: 'https://www.linkedin.com/analytics/post-summary/urn:li:activity:7371207686669012992/?skipRedirect=true',
     },
     {
-      id: 7,
+      id: 8,
       title: 'Dose Diária CTFL Tester Foundation - Cap. 02',
       excerpt:
         'Os testes ao longo do SDLC descrevem os tipos de atividades realizadas em cada estágio do projeto.',
@@ -204,9 +218,9 @@ export const defaultData = {
 
   contact: {
     name: 'Augusto Santos',
-    role: 'QA · Full-Stack Developer',
+    role: 'QA · Full-Stack Developer · Test Automation',
     email: 'augustoarandiba@gmail.com',
-    phone: '+55 (11) 98490-9210',
+    phone: '+55 (71) 98490-9210',
     location: 'Bahia, Brasil',
     githubUrl: 'https://github.com/AugustoArand',
     linkedinUrl: 'https://www.linkedin.com/in/augusto-arandiba-b26b90105/',
