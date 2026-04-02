@@ -33,7 +33,10 @@ jobs:
         
       - name: Build
         run: npm run build
-        
+
+      - name: Copy index.html to 404.html (SPA routing fix for GitHub Pages)
+        run: cp dist/index.html dist/404.html
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
         
