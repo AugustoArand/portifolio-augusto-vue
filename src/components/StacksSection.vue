@@ -53,68 +53,17 @@
 </template>
 
 <script>
-import vueIcon        from '../assets/pics/vue.png'
-import reactIcon      from '../assets/pics/react.png'
-import nodeIcon       from '../assets/pics/node.png'
-import rubyIcon       from '../assets/pics/ruby.png'
-import javascriptIcon from '../assets/pics/JS.jpg'
-import robotIcon      from '../assets/pics/robotframework.png'
-import cypressIcon    from '../assets/pics/cypress.png'
-import postgresIcon   from '../assets/pics/postgres.jpg'
-import mongoIcon      from '../assets/pics/mongodb.jpg'
-import postmanIcon    from '../assets/pics/postman.png'
-import jmeterIcon     from '../assets/pics/jmeter.png'
-import jiraIcon       from '../assets/pics/jira.png'
-import gitHubIcon     from '../assets/pics/github-logo.png'
-import grafanaIcon    from '../assets/pics/grafana-icon.png'
+import { computed } from 'vue'
+import { usePortfolioData } from '../composables/usePortfolioData.js'
 
 export default {
   name: 'StacksSection',
-  data() {
-    return {
-      stackGroups: [
-        {
-          label: '⚡ Frontend',
-          stacks: [
-            { name: 'Vue.js',      icon: vueIcon,        level: 90 },
-            { name: 'React',       icon: reactIcon,      level: 85 },
-            { name: 'Javascript',  icon: javascriptIcon, level: 80 },
-          ]
-        },
-        {
-          label: '🛠️ Backend',
-          stacks: [
-            { name: 'Node.js',     icon: nodeIcon,       level: 88 },
-            { name: 'Ruby on Rails', icon: rubyIcon,     level: 65 },
-          ]
-        },
-        {
-          label: '🧪 QA & Automação',
-          stacks: [
-            { name: 'Robot Framework', icon: robotIcon,  level: 75 },
-            { name: 'Cypress',         icon: cypressIcon, level: 78 },
-            { name: 'Postman',         icon: postmanIcon, level: 92 },
-            { name: 'Jmeter',          icon: jmeterIcon,  level: 92 },
-          ]
-        },
-        {
-          label: '🗄️ Banco de Dados & Gestão',
-          stacks: [
-            { name: 'PostgreSQL', icon: postgresIcon, level: 80 },
-            { name: 'MongoDB',    icon: mongoIcon,    level: 92 },
-            { name: 'Jira',       icon: jiraIcon,     level: 92 },
-            { name: 'Github Actions',       icon: gitHubIcon,     level: 85 },
-            { name: 'Grafana',       icon: grafanaIcon,     level: 70 },
-          ]
-        },
-      ],
-    }
+  setup() {
+    const { portfolioData } = usePortfolioData()
+    const stackGroups = computed(() => portfolioData.value.stacks)
+    const allStacks = computed(() => stackGroups.value.flatMap(g => g.stacks))
+    return { stackGroups, allStacks }
   },
-  computed: {
-    allStacks() {
-      return this.stackGroups.flatMap(g => g.stacks)
-    }
-  }
 }
 </script>
 

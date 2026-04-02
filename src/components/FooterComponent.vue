@@ -7,8 +7,8 @@
         <div class="footer-brand">
           <div class="footer-logo">AS</div>
           <div>
-            <div class="footer-name">Augusto Santos</div>
-            <div class="footer-role">QA · Full-Stack Developer</div>
+            <div class="footer-name">{{ contact.name }}</div>
+            <div class="footer-role">{{ contact.role }}</div>
             <a-tag color="green" style="margin-top: 0.5rem; font-size: 13px;">
               CPRE-FL Certified
             </a-tag>
@@ -26,28 +26,28 @@
 
           <div class="link-group">
             <div class="link-group-title">Contato</div>
-            <a href="mailto:augustoarandiba@gmail.com" class="footer-link">
-              <MailOutlined /> augustoarandiba@gmail.com
+            <a :href="`mailto:${contact.email}`" class="footer-link">
+              <MailOutlined /> {{ contact.email }}
             </a>
-            <a href="tel:+5511984909210" class="footer-link">
-              <PhoneOutlined /> +55 (11) 98490-9210
+            <a :href="`tel:${contact.phone.replace(/\D/g,'')}`" class="footer-link">
+              <PhoneOutlined /> {{ contact.phone }}
             </a>
             <span class="footer-link no-hover">
-              <EnvironmentOutlined /> Bahia, Brasil
+              <EnvironmentOutlined /> {{ contact.location }}
             </span>
           </div>
 
           <div class="link-group">
             <div class="link-group-title">Redes Sociais</div>
             <a
-              href="https://github.com/AugustoArand"
+              :href="contact.githubUrl"
               target="_blank"
               class="footer-link social-link"
             >
               <GithubOutlined /> GitHub
             </a>
             <a
-              href="https://www.linkedin.com/in/augusto-arandiba-b26b90105/"
+              :href="contact.linkedinUrl"
               target="_blank"
               class="footer-link social-link"
             >
@@ -59,15 +59,15 @@
 
       <!-- Bottom bar -->
       <div class="footer-bottom">
-        <span>© 2025 Augusto Arand. Todos os direitos reservados.</span>
+        <span>© 2025 {{ contact.name }}. Todos os direitos reservados.</span>
         <div class="social-icons">
-          <a href="https://github.com/AugustoArand" target="_blank" class="social-icon">
+          <a :href="contact.githubUrl" target="_blank" class="social-icon">
             <GithubOutlined />
           </a>
-          <a href="https://www.linkedin.com/in/augusto-arandiba-b26b90105/" target="_blank" class="social-icon">
+          <a :href="contact.linkedinUrl" target="_blank" class="social-icon">
             <LinkedinOutlined />
           </a>
-          <a href="mailto:augustoarandiba@gmail.com" class="social-icon">
+          <a :href="`mailto:${contact.email}`" class="social-icon">
             <MailOutlined />
           </a>
         </div>
@@ -84,10 +84,17 @@ import {
   PhoneOutlined,
   EnvironmentOutlined
 } from '@ant-design/icons-vue'
+import { computed } from 'vue'
+import { usePortfolioData } from '../composables/usePortfolioData.js'
 
 export default {
   name: 'FooterComponent',
   components: { GithubOutlined, LinkedinOutlined, MailOutlined, PhoneOutlined, EnvironmentOutlined },
+  setup() {
+    const { portfolioData } = usePortfolioData()
+    const contact = computed(() => portfolioData.value.contact)
+    return { contact }
+  },
   methods: {
     scrollTo(id) {
       const el = document.getElementById(id)

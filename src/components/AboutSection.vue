@@ -17,23 +17,17 @@
             </div> -->
 
             <h1 class="hero-title">
-              Olá, sou <span class="highlight">Augusto Santos</span>
+              Olá, sou <span class="highlight">{{ portfolioData.about.heroTitle }}</span>
             </h1>
 
             <p class="hero-tagline">
-              QA · Desenvolvedor Full-Stack · CPRE-FL Certified
+              {{ portfolioData.about.heroTagline }}
             </p>
 
-            <p class="hero-bio">
-              Apaixonado por motos e tecnologia, atualmente cursando <strong>Análise e Desenvolvimento de Sistemas</strong> e atuando como <strong>Estagiário QA</strong> na Tecsinapse. Certificado <strong>CPRE-FL</strong> pelo IREB.
-            </p>
+            <p class="hero-bio" v-html="portfolioData.about.heroBio"></p>
 
             <div class="hero-tags">
-              <span class="tag">Testes Automatizados</span>
-              <span class="tag">Cypress</span>
-              <span class="tag">Robot Framework</span>
-              <span class="tag">DevOps</span>
-              <span class="tag">Node.js</span>
+              <span v-for="tag in portfolioData.about.heroTags" :key="tag" class="tag">{{ tag }}</span>
             </div>
 
             <div class="hero-actions">
@@ -42,7 +36,7 @@
                 <ArrowRightOutlined />
               </a>
               <a
-                href="https://www.linkedin.com/in/augusto-arandiba-b26b90105/"
+                :href="portfolioData.about.linkedinUrl"
                 target="_blank"
                 class="btn btn-ghost"
               >
@@ -50,7 +44,7 @@
                 LinkedIn
               </a>
               <a
-                href="https://github.com/AugustoArand"
+                :href="portfolioData.about.githubUrl"
                 target="_blank"
                 class="btn btn-ghost"
               >
@@ -63,7 +57,7 @@
 
         <!-- Stats row -->
         <div class="stats-row">
-          <div class="stat-item" v-for="s in stats" :key="s.label">
+          <div class="stat-item" v-for="s in portfolioData.about.stats" :key="s.label">
             <span class="stat-value">{{ s.value }}</span>
             <span class="stat-label">{{ s.label }}</span>
           </div>
@@ -75,20 +69,14 @@
     <div class="bio-section">
       <div class="container">
         <div class="bio-grid">
-          <div class="bio-card experience-card">
+          <div
+            v-for="(card, i) in portfolioData.about.bioCards"
+            :key="i"
+            class="bio-card"
+          >
             <div class="bio-card-icon"></div>
-            <h3>Experiência em QA</h3>
-            <p>Testes manuais, automatizados, funcionais, não funcionais, regressão e confirmação. Gestão de bugs com <strong>Jira</strong>, <strong>Azure DevOps</strong> e <strong>GitHub Actions</strong>.</p>
-          </div>
-          <div class="bio-card dev-card">
-            <div class="bio-card-icon"></div>
-            <h3>Desenvolvimento Full-Stack</h3>
-            <p>JavaScript, Node.js, React, Vue.js, Next.js, Prisma ORM, Ruby. Banco de dados: <strong>PostgreSQL</strong>, <strong>MySQL</strong>, <strong>MongoDB</strong>.</p>
-          </div>
-          <div class="bio-card cert-card">
-            <div class="bio-card-icon"></div>
-            <h3>Certificações</h3>
-            <p>Certificação <strong>CPRE-FL</strong> (Engenharia de Requisitos — Nível Fundamental) pelo <strong>IREB</strong>. Aprendizado contínuo em CTFL.</p>
+            <h3>{{ card.title }}</h3>
+            <p v-html="card.text"></p>
           </div>
         </div>
       </div>
@@ -99,28 +87,21 @@
 <script>
 import { ArrowRightOutlined, LinkedinOutlined, GithubOutlined } from '@ant-design/icons-vue'
 import profileImage from '../assets/pics/profile-pic.png'
+import { usePortfolioData } from '../composables/usePortfolioData.js'
 
 export default {
   name: 'AboutSection',
   components: { ArrowRightOutlined, LinkedinOutlined, GithubOutlined },
   setup() {
+    const { portfolioData } = usePortfolioData()
+
     const scrollTo = (id) => {
       const el = document.getElementById(id)
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
-    return { scrollTo }
+
+    return { profileImage, portfolioData, scrollTo }
   },
-  data() {
-    return {
-      profileImage,
-      stats: [
-        { value: '3+',  label: 'Anos de experiência' },
-        { value: '7',   label: 'Projetos concluídos' },
-        { value: '12+', label: 'Tecnologias' },
-        { value: '1',   label: 'Certificação CPRE-FL' },
-      ]
-    }
-  }
 }
 </script>
 

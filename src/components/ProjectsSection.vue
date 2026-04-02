@@ -73,76 +73,18 @@
 
 <script>
 import { ArrowRightOutlined, EyeOutlined, ProjectOutlined } from '@ant-design/icons-vue'
-import maptyImage from '../assets/pics/mapty.PNG'
-import pigGameImage from '../assets/pics/pig-game.PNG'
-import guessNumberImage from '../assets/pics/guess-my-number.PNG'
-import airBnbDemoImage from '../assets/pics/airbnb-demo.PNG'
-import simuladorBancoImage from '../assets/pics/simulador-banco.png'
-import motoConsultorImage from '../assets/pics//fastify-project.png'
-import sistemaCondominioImage from '../assets/pics/cond-agend.png'
+import { computed } from 'vue'
+import { usePortfolioData } from '../composables/usePortfolioData.js'
 
 export default {
   name: 'ProjectsSection',
   components: { ArrowRightOutlined, EyeOutlined, ProjectOutlined },
-  data() {
-    return {
-      projects: [
-        {
-          title: 'Sistema de Gerenciamento de Condomínios',
-          description: 'Sistema real desenvolvido para o gerenciamento dos espaços do condomínio e centralização de comunicados importantes.',
-          image: sistemaCondominioImage,
-          tags: ['Vue.js', 'MongoDB', 'Express', 'Node.js'],
-          link: 'https://agendamento-estrela-do-sol.vercel.app'
-        },
-        {
-          title: 'Gerenciador de Exercícios',
-          description: 'Sistema de gerenciamento de atividades físicas com a biblioteca de geolocalização Leaflet.js.',
-          image: maptyImage,
-          tags: ['Javascript', 'CSS', 'HTML'],
-          link: 'https://augustoarand.github.io/mapty-exercise/'
-        },
-        {
-          title: 'Gerenciador e Consultor de Motos',
-          description: 'API REST desenvolvida para o gerenciamento de motos e consulta de informações técnicas.',
-          image: motoConsultorImage,
-          tags: ['Fastify', 'Node.js', 'JavaScript'],
-          link: 'https://api-fastify-harley-front.onrender.com'
-        },
-        {
-          title: 'Pig Game',
-          description: 'Um mini game desenvolvido através de JS, HTML e CSS.',
-          image: pigGameImage,
-          tags: ['Javascript', 'CSS', 'HTML'],
-          link: 'https://augustoarand.github.io/pig-game/'
-        },
-        {
-          title: 'Guess My Number',
-          description: 'Um mini game desenvolvido através de JS, HTML e CSS.',
-          image: guessNumberImage,
-          tags: ['Javascript', 'CSS', 'HTML'],
-          link: 'https://augustoarand.github.io/guess-my-number/'
-        },
-        {
-          title: 'AirBNB Demo',
-          description: 'Projeto desenvolvido em React + Next.js consumindo a API pública da Airbnb.',
-          image: airBnbDemoImage,
-          tags: ['React', 'Next.js'],
-          link: '#'
-        },
-        {
-          title: 'Simulador Conta Bancária',
-          description: 'Desenvolvido em JS, CSS e HTML.',
-          image: simuladorBancoImage,
-          tags: ['Javascript', 'CSS', 'HTML'],
-          link: 'https://augustoarand.github.io/Bank-App/'
-        },
-      ]
-    }
+  setup() {
+    const { portfolioData } = usePortfolioData()
+    const projects = computed(() => portfolioData.value.projects)
+    const displayedProjects = computed(() => projects.value.slice(1, 5))
+    return { projects, displayedProjects }
   },
-  computed: {
-    // Projects 1..4 for the supporting grid (after the featured [0])
-    displayedProjects() { return this.projects.slice(1, 5) }
-  }
 }
 </script>
 
