@@ -61,6 +61,21 @@ export const defaultData = {
       imageKey: 'motoConsultor',
     },
     {
+      title: '[PRIVADO] Duck Notes',
+      description: 'Um bloco de notas sofisticado desenvolvido em Ruby on Rails 8 (API) + Vue.js 3 + Vite',
+      tags: ['Ruby on Rails 8', 'Vue.js', 'Vite'],
+      link: '',
+      imageKey: 'blocoNotas',
+    },
+    {
+      title: '[PRIVADO] Storm Ink',
+      description: 'Portifolio de tatuagem desenvolvido em Vue.js + Nest.js + Vite',
+      tags: ['Nest.Js', 'Vue.js', 'Node.js'],
+      link: '',
+      imageKey: 'tattoPortifolio',
+    },
+
+    {
       title: 'Pig Game',
       description: 'Um mini game desenvolvido através de JS, HTML e CSS.',
       tags: ['Javascript', 'CSS', 'HTML'],

@@ -9,6 +9,8 @@ import airBnbDemoImage from '../assets/pics/airbnb-demo.PNG'
 import simuladorBancoImage from '../assets/pics/simulador-banco.png'
 import motoConsultorImage from '../assets/pics/fastify-project.png'
 import sistemaCondominioImage from '../assets/pics/cond-agend.png'
+import blocoNotasImage from '../assets/pics/bloco-de-notas.png'
+import tattoPortifolioImage from '../assets/pics/estudio-tatto.png'
 
 // ── Imports de ícones de stacks ──────────────────────────────────────────────
 import vueIcon from '../assets/pics/vue.png'
@@ -37,6 +39,8 @@ export const imageMap = {
   guessNumber: guessNumberImage,
   airBnbDemo: airBnbDemoImage,
   simuladorBanco: simuladorBancoImage,
+  blocoNotas: blocoNotasImage,
+  tattoPortifolio: tattoPortifolioImage,
 }
 
 export const iconMap = {
