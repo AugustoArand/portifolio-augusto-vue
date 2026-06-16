@@ -10,15 +10,15 @@
   >
     <div v-if="project" class="modal-content">
       <!-- Gallery -->
-      <div class="gallery-wrap">
+      <div class="gallery-wrap" :class="{ 'gallery-wrap--portrait': project.galleryMode === 'portrait' }">
         <a-carousel arrows autoplay :dots="hasMultipleImages">
           <!-- Primary image always shown -->
           <div class="gallery-slide">
-            <img :src="project.image" :alt="project.title" class="gallery-img" />
+            <img :src="project.image" :alt="project.title" class="gallery-img" :class="{ 'gallery-img--contain': project.galleryMode === 'portrait' }" />
           </div>
           <!-- Extra gallery images (optional) -->
           <div v-for="(img, i) in project.gallery" :key="i" class="gallery-slide">
-            <img :src="img" :alt="`${project.title} – foto ${i + 2}`" class="gallery-img" />
+            <img :src="img" :alt="`${project.title} – foto ${i + 2}`" class="gallery-img" :class="{ 'gallery-img--contain': project.galleryMode === 'portrait' }" />
           </div>
           <template #prevArrow>
             <div class="carousel-arrow carousel-arrow-left">
@@ -145,11 +145,21 @@ export default {
   overflow: hidden;
 }
 
+.gallery-wrap--portrait .gallery-slide {
+  height: 500px;
+  background: #0d0d0d;
+}
+
 .gallery-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.gallery-img--contain {
+  object-fit: contain;
+  padding: 1rem;
 }
 
 .carousel-arrow {
@@ -280,6 +290,10 @@ export default {
 @media (max-width: 600px) {
   .gallery-slide {
     height: 220px;
+  }
+
+  .gallery-wrap--portrait .gallery-slide {
+    height: 360px;
   }
 
   .modal-info {

@@ -55,6 +55,7 @@ export const defaultData = {
       repoUrl: '',
       imageKey: 'appCond01',
       galleryKey: 'appCondominio',
+      galleryMode: 'portrait',
     },
     {
       title: 'Gerenciador de Exercícios',
@@ -77,7 +78,7 @@ export const defaultData = {
     },
     {
       title: 'Nexus Notes',
-      description: 'Um bloco de notas sofisticado desenvolvido em Ruby on Rails 8 (API) + Vue.js 3 + Vite',
+      description: 'Gerenciador de atividades e notas com integração IA, sistema de conexão de ideias, Kanban separado por espaços/projetos, Sistema de lembretes, checklists rápidos e anotações rápidas, biblioteca onde é possível importar pdf e realizar estudos e anotações',
       tags: ['Ruby on Rails 8', 'Vue.js', 'Vite',],
       link: '',
       repoUrl: '',
