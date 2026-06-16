@@ -25,72 +25,85 @@
 
     <div class="projects-container">
       <a-row :gutter="[32, 32]">
-        <a-col 
-          v-for="(project, index) in projects" 
-          :key="project.title" 
-          :xs="24" 
-          :sm="12" 
+        <a-col
+          v-for="(project, index) in projects"
+          :key="project.title"
+          :xs="24"
+          :sm="12"
           :lg="8"
           class="project-col"
         >
-          <div class="project-card" :style="{ animationDelay: `${index * 0.1}s` }">
+          <div
+            class="project-card"
+            :style="{ animationDelay: `${index * 0.1}s` }"
+            @click="openModal(project)"
+            style="cursor:pointer"
+          >
             <div class="project-image-container">
               <img :src="project.image" :alt="project.title" class="project-image" />
               <div class="project-overlay">
-                <a 
-                  :href="project.link" 
-                  target="_blank"
-                  class="view-project-btn"
-                >
-                  <EyeOutlined class="btn-icon" /> Ver Projeto
-                </a>
+                <button class="view-project-btn" @click.stop="openModal(project)">
+                  <EyeOutlined class="btn-icon" /> Ver Detalhes
+                </button>
               </div>
             </div>
-            
+
             <div class="project-content">
               <div class="project-icon">
                 <ProjectOutlined />
               </div>
               <h3 class="project-title">{{ project.title }}</h3>
               <p class="project-description">{{ project.description }}</p>
-              
+
               <div class="project-tags">
-                <span 
-                  v-for="tag in project.tags" 
-                  :key="tag" 
+                <span
+                  v-for="tag in project.tags"
+                  :key="tag"
                   class="tech-tag"
                 >
                   {{ tag }}
                 </span>
               </div>
-              
-              <a 
-                :href="project.link" 
-                target="_blank"
-                class="project-link"
-              >
-                Acessar projeto <ArrowRightOutlined class="arrow-icon" />
-              </a>
+
+              <span class="project-link">
+                Ver detalhes <ArrowRightOutlined class="arrow-icon" />
+              </span>
             </div>
           </div>
         </a-col>
       </a-row>
     </div>
+
+    <ProjectModal
+      :visible="modalVisible"
+      :project="selectedProject"
+      @close="modalVisible = false"
+    />
   </section>
 </template>
 
 <script>
 import { ProjectOutlined, ArrowRightOutlined, EyeOutlined, LeftOutlined } from '@ant-design/icons-vue'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { usePortfolioData } from '../composables/usePortfolioData.js'
+import ProjectModal from '../components/ProjectModal.vue'
 
 export default {
   name: 'AllProjects',
-  components: { ProjectOutlined, ArrowRightOutlined, EyeOutlined, LeftOutlined },
+  components: { ProjectOutlined, ArrowRightOutlined, EyeOutlined, LeftOutlined, ProjectModal },
   setup() {
     const { portfolioData } = usePortfolioData()
     const projects = computed(() => portfolioData.value.projects)
-    return { projects }
+
+    const modalVisible = ref(false)
+    const selectedProject = ref(null)
+
+    function openModal(project) {
+      selectedProject.value = project
+      modalVisible.value = true
+    }
+
+    return { projects, modalVisible, selectedProject, openModal }
   },
 }
 </script>
@@ -312,7 +325,6 @@ export default {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  text-decoration: none;
   box-shadow: 0 4px 15px rgba(66, 185, 131, 0.4);
 }
 
@@ -408,13 +420,12 @@ export default {
   align-items: center;
   gap: 0.5rem;
   transition: all 0.3s ease;
-  text-decoration: none;
   margin-top: auto;
   padding-top: 1rem;
   border-top: 1px solid #eee;
 }
 
-.project-link:hover {
+.project-card:hover .project-link {
   color: #34a870;
   gap: 1rem;
 }

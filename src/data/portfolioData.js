@@ -7,10 +7,10 @@
 export const defaultData = {
   about: {
     heroTitle: 'Augusto Santos',
-    heroTagline: 'QA · Desenvolvedor Full-Stack · CPRE-FL Certified',
+    heroTagline: 'QA · Análise de Requisitos · CPRE-FL Certified',
     heroBio:
       'Apaixonado por motos e tecnologia, atualmente cursando <strong>Análise e Desenvolvimento de Sistemas</strong> e atuando como <strong>Estagiário QA</strong> na Tecsinapse. Certificado <strong>CPRE-FL</strong> pelo IREB.',
-    heroTags: ['Testes Automatizados', 'Cypress', 'Robot Framework', 'DevOps', 'Node.js'],
+    heroTags: ['Testes Automatizados', 'Cloud', 'Javascript', 'DevOps', 'Ruby'],
     linkedinUrl: 'https://www.linkedin.com/in/augusto-arandiba-b26b90105/',
     githubUrl: 'https://github.com/AugustoArand',
     stats: [
@@ -42,7 +42,19 @@ export const defaultData = {
         'Sistema real desenvolvido para o gerenciamento dos espaços do condomínio e centralização de comunicados importantes.',
       tags: ['Vue.js', 'MongoDB', 'Express', 'Node.js'],
       link: 'https://agendamento-estrela-do-sol.vercel.app',
+      repoUrl: 'https://github.com/AugustoArand',
       imageKey: 'sistemaCondominio',
+      galleryKey: 'webCondominio',
+    },
+    {
+      title: 'App Sistema de Gerenciamento de Condomínios',
+      description:
+        'Aplicativo o gerenciamento dos espaços do condomínio e centralização de comunicados importantes.',
+      tags: ['Vue.js', 'Redis', 'Express', 'Node.js', 'MySQL'],
+      link: '',
+      repoUrl: '',
+      imageKey: 'appCond01',
+      galleryKey: 'appCondominio',
     },
     {
       title: 'Gerenciador de Exercícios',
@@ -50,7 +62,9 @@ export const defaultData = {
         'Sistema de gerenciamento de atividades físicas com a biblioteca de geolocalização Leaflet.js.',
       tags: ['Javascript', 'CSS', 'HTML'],
       link: 'https://augustoarand.github.io/mapty-exercise/',
+      repoUrl: 'https://github.com/AugustoArand/mapty-exercise',
       imageKey: 'mapty',
+      galleryKey: 'gerenciamentoExercicios',
     },
     {
       title: 'Gerenciador e Consultor de Motos',
@@ -58,28 +72,32 @@ export const defaultData = {
         'API REST desenvolvida para o gerenciamento de motos e consulta de informações técnicas.',
       tags: ['Fastify', 'Node.js', 'JavaScript'],
       link: 'https://api-fastify-harley-front.onrender.com',
+      repoUrl: 'https://github.com/AugustoArand',
       imageKey: 'motoConsultor',
     },
     {
-      title: '[PRIVADO] Duck Notes',
+      title: 'Nexus Notes',
       description: 'Um bloco de notas sofisticado desenvolvido em Ruby on Rails 8 (API) + Vue.js 3 + Vite',
-      tags: ['Ruby on Rails 8', 'Vue.js', 'Vite'],
+      tags: ['Ruby on Rails 8', 'Vue.js', 'Vite',],
       link: '',
+      repoUrl: '',
       imageKey: 'blocoNotas',
+      galleryKey: 'nexusNotes',
     },
     {
       title: '[PRIVADO] Storm Ink',
       description: 'Portifolio de tatuagem desenvolvido em Vue.js + Nest.js + Vite',
       tags: ['Nest.Js', 'Vue.js', 'Node.js'],
       link: '',
+      repoUrl: '',
       imageKey: 'tattoPortifolio',
     },
-
     {
       title: 'Pig Game',
       description: 'Um mini game desenvolvido através de JS, HTML e CSS.',
       tags: ['Javascript', 'CSS', 'HTML'],
       link: 'https://augustoarand.github.io/pig-game/',
+      repoUrl: 'https://github.com/AugustoArand/pig-game',
       imageKey: 'pigGame',
     },
     {
@@ -87,6 +105,7 @@ export const defaultData = {
       description: 'Um mini game desenvolvido através de JS, HTML e CSS.',
       tags: ['Javascript', 'CSS', 'HTML'],
       link: 'https://augustoarand.github.io/guess-my-number/',
+      repoUrl: 'https://github.com/AugustoArand/guess-my-number',
       imageKey: 'guessNumber',
     },
     {
@@ -94,6 +113,7 @@ export const defaultData = {
       description: 'Projeto desenvolvido em React + Next.js consumindo a API pública da Airbnb.',
       tags: ['React', 'Next.js'],
       link: '#',
+      repoUrl: 'https://github.com/AugustoArand',
       imageKey: 'airBnbDemo',
     },
     {
@@ -101,6 +121,7 @@ export const defaultData = {
       description: 'Desenvolvido em JS, CSS e HTML.',
       tags: ['Javascript', 'CSS', 'HTML'],
       link: 'https://augustoarand.github.io/Bank-App/',
+      repoUrl: 'https://github.com/AugustoArand/Bank-App',
       imageKey: 'simuladorBanco',
     },
   ],
@@ -128,7 +149,7 @@ export const defaultData = {
         { name: 'Cypress', iconKey: 'cypress', level: 78 },
         { name: 'Postman', iconKey: 'postman', level: 92 },
         { name: 'Jmeter', iconKey: 'jmeter', level: 92 },
-        { name: 'Playwright', iconKey: 'playwright', level: 40 }
+        { name: 'Playwright', iconKey: 'playwright', level: 40 },
       ],
     },
     {

@@ -11,6 +11,24 @@ import motoConsultorImage from '../assets/pics/fastify-project.png'
 import sistemaCondominioImage from '../assets/pics/cond-agend.png'
 import blocoNotasImage from '../assets/pics/bloco-de-notas.png'
 import tattoPortifolioImage from '../assets/pics/estudio-tatto.png'
+import appCond01 from '../assets/pics/app-condominio/app-cond-01.png'
+import appCond02 from '../assets/pics/app-condominio/app-cond-02.png'
+import appCond03 from '../assets/pics/app-condominio/app-cond-03.png'
+import appCond04 from '../assets/pics/app-condominio/app-cond-04.png'
+import webCond01 from '../assets/pics/web-condominio/web-condominio-01.png'
+import webCond02 from '../assets/pics/web-condominio/web-condominio-02.png'
+import webCond03 from '../assets/pics/web-condominio/web-condominio-03.png'
+import webCond04 from '../assets/pics/web-condominio/web-condominio-04.png'
+import exerc01 from '../assets/pics/gerenciamento-exercicios/exerc-01.png'
+import exerc02 from '../assets/pics/gerenciamento-exercicios/exerc-02.png'
+import nexus01 from '../assets/pics/nexus-notes/nexus-01.png'
+import nexus02 from '../assets/pics/nexus-notes/nexus-02.png'
+import nexus04 from '../assets/pics/nexus-notes/nexus-04.png'
+import nexus05 from '../assets/pics/nexus-notes/nexus-05.png'
+import nexus06 from '../assets/pics/nexus-notes/nexus-06.png'
+import nexus07 from '../assets/pics/nexus-notes/nexus-07.png'
+import nexus08 from '../assets/pics/nexus-notes/nexus-08.png'
+import nexus09 from '../assets/pics/nexus-notes/nexus-09.png'
 
 // ── Imports de ícones de stacks ──────────────────────────────────────────────
 import vueIcon from '../assets/pics/vue.png'
@@ -41,6 +59,14 @@ export const imageMap = {
   simuladorBanco: simuladorBancoImage,
   blocoNotas: blocoNotasImage,
   tattoPortifolio: tattoPortifolioImage,
+  appCond01: appCond01,
+}
+
+export const galleryMap = {
+  appCondominio: [appCond01, appCond02, appCond03, appCond04],
+  webCondominio: [webCond01, webCond02, webCond03, webCond04],
+  gerenciamentoExercicios: [exerc01, exerc02],
+  nexusNotes: [nexus01, nexus02, nexus04, nexus05, nexus06, nexus07, nexus08, nexus09],
 }
 
 export const iconMap = {
@@ -117,6 +143,7 @@ const portfolioData = computed(() => ({
   projects: (state.projects || []).map((p) => ({
     ...p,
     image: p.imageUrl || imageMap[p.imageKey] || '',
+    gallery: (p.gallery && p.gallery.length > 0) ? p.gallery : (p.galleryKey ? galleryMap[p.galleryKey] : undefined),
   })),
   stacks: (state.stacks || []).map((g) => ({
     ...g,

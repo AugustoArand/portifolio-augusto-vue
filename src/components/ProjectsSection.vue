@@ -10,13 +10,13 @@
       </div>
 
       <!-- Featured project (first, larger) -->
-      <div v-if="projects.length" class="featured-project" >
+      <div v-if="projects.length" class="featured-project" @click="openModal(projects[0])" style="cursor:pointer">
         <div class="featured-image-wrap">
           <img :src="projects[0].image" :alt="projects[0].title" class="featured-img" />
           <div class="featured-overlay">
-            <a :href="projects[0].link" target="_blank" class="overlay-btn">
-              <EyeOutlined /> Ver Projeto
-            </a>
+            <button class="overlay-btn" @click.stop="openModal(projects[0])">
+              <EyeOutlined /> Ver Detalhes
+            </button>
           </div>
         </div>
         <div class="featured-info">
@@ -26,9 +26,9 @@
           <div class="project-tags">
             <span v-for="t in projects[0].tags" :key="t" class="tech-tag">{{ t }}</span>
           </div>
-          <a :href="projects[0].link" target="_blank" class="featured-link">
-            Acessar Projeto <ArrowRightOutlined />
-          </a>
+          <button class="featured-link" @click.stop="openModal(projects[0])">
+            Ver Detalhes <ArrowRightOutlined />
+          </button>
         </div>
       </div>
 
@@ -39,13 +39,15 @@
           :key="project.title"
           class="project-card"
           :style="{ animationDelay: `${index * 0.08}s` }"
+          @click="openModal(project)"
+          style="cursor:pointer"
         >
           <div class="card-image-wrap">
             <img :src="project.image" :alt="project.title" class="card-img" />
             <div class="card-overlay">
-              <a :href="project.link" target="_blank" class="overlay-icon-btn">
+              <button class="overlay-icon-btn" @click.stop="openModal(project)">
                 <EyeOutlined />
-              </a>
+              </button>
             </div>
           </div>
           <div class="card-body">
@@ -54,9 +56,9 @@
             </div>
             <h3 class="card-title">{{ project.title }}</h3>
             <p class="card-desc">{{ project.description }}</p>
-            <a :href="project.link" target="_blank" class="card-link">
-              Ver projeto <ArrowRightOutlined />
-            </a>
+            <span class="card-link">
+              Ver detalhes <ArrowRightOutlined />
+            </span>
           </div>
         </div>
       </div>
@@ -68,22 +70,38 @@
         </button>
       </div>
     </div>
+
+    <ProjectModal
+      :visible="modalVisible"
+      :project="selectedProject"
+      @close="modalVisible = false"
+    />
   </section>
 </template>
 
 <script>
 import { ArrowRightOutlined, EyeOutlined, ProjectOutlined } from '@ant-design/icons-vue'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { usePortfolioData } from '../composables/usePortfolioData.js'
+import ProjectModal from './ProjectModal.vue'
 
 export default {
   name: 'ProjectsSection',
-  components: { ArrowRightOutlined, EyeOutlined, ProjectOutlined },
+  components: { ArrowRightOutlined, EyeOutlined, ProjectOutlined, ProjectModal },
   setup() {
     const { portfolioData } = usePortfolioData()
     const projects = computed(() => portfolioData.value.projects)
     const displayedProjects = computed(() => projects.value.slice(1, 5))
-    return { projects, displayedProjects }
+
+    const modalVisible = ref(false)
+    const selectedProject = ref(null)
+
+    function openModal(project) {
+      selectedProject.value = project
+      modalVisible.value = true
+    }
+
+    return { projects, displayedProjects, modalVisible, selectedProject, openModal }
   },
 }
 </script>
@@ -179,8 +197,9 @@ export default {
   color: white;
   border-radius: 50px;
   font-weight: 700;
-  text-decoration: none;
   font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
   transition: transform 0.2s ease;
 }
 
@@ -227,8 +246,12 @@ export default {
   gap: 0.5rem;
   font-weight: 700;
   color: var(--color-green);
-  text-decoration: none;
   font-size: 0.95rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: var(--font-body);
   transition: gap 0.2s ease;
 }
 
@@ -302,7 +325,8 @@ export default {
   align-items: center;
   justify-content: center;
   font-size: 1.25rem;
-  text-decoration: none;
+  border: none;
+  cursor: pointer;
   transition: transform 0.2s;
 }
 
@@ -364,7 +388,6 @@ export default {
   font-size: 0.85rem;
   font-weight: 700;
   color: var(--color-green);
-  text-decoration: none;
   margin-top: auto;
   padding-top: 0.75rem;
   border-top: 1px solid var(--color-border);
