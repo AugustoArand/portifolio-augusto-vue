@@ -22,7 +22,7 @@ const routes = [
 ]
 
 const router = createRouter({
-    history: createWebHistory('/portifolio-augusto-vue/'),
+    history: createWebHistory(import.meta.env.BASE_URL),
     routes,
     scrollBehavior(to, from, savedPosition) {
         if (to.hash) {

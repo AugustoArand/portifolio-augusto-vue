@@ -35,6 +35,7 @@ jobs:
         run: npm run build
         env:
           VITE_API_URL: ${{ secrets.VITE_API_URL }}
+          VITE_BASE: /portifolio-augusto-vue/
 
       - name: Copy index.html to 404.html (SPA routing fix for GitHub Pages)
         run: cp dist/index.html dist/404.html
