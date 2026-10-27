@@ -1,83 +1,42 @@
 <template>
   <section id="about" class="about-section">
-    <!-- Hero -->
-    <div class="hero">
-      <div class="container">
-        <div class="hero-content">
-          <div class="hero-left">
-            <div class="avatar-ring">
-              <img :src="profileImage" alt="Augusto Santos" class="avatar-img" />
-            </div>
-          </div>
-
-          <div class="hero-right">
-            <!-- <div class="hero-eyebrow">
-              <span class="status-dot"></span>
-              Disponível para novas oportunidades
-            </div> -->
-
-            <h1 class="hero-title">
-              Olá, sou <span class="highlight">{{ portfolioData.about.heroTitle }}</span>
-            </h1>
-
-            <p class="hero-tagline">
-              {{ portfolioData.about.heroTagline }}
-            </p>
-
-            <p class="hero-bio" v-html="portfolioData.about.heroBio"></p>
-
-            <div class="hero-tags">
-              <span v-for="tag in portfolioData.about.heroTags" :key="tag" class="tag">{{ tag }}</span>
-            </div>
-
-            <div class="hero-actions">
-              <a href="/#projects" @click.prevent="scrollTo('projects')" class="btn btn-primary">
-                Ver Projetos
-                <ArrowRightOutlined />
-              </a>
-              <a
-                :href="portfolioData.about.linkedinUrl"
-                target="_blank"
-                class="btn btn-ghost"
-              >
-                <LinkedinOutlined />
-                LinkedIn
-              </a>
-              <a
-                :href="portfolioData.about.githubUrl"
-                target="_blank"
-                class="btn btn-ghost"
-              >
-                <GithubOutlined />
-                GitHub
-              </a>
-            </div>
+    <div class="container">
+      <!-- Hero -->
+      <div class="hero">
+        <div class="hero-text">
+          <p class="hero-tagline mono">{{ portfolioData.about.heroTagline }}</p>
+          <h1 class="hero-title">{{ portfolioData.about.heroTitle }}</h1>
+          <p class="hero-bio" v-html="portfolioData.about.heroBio"></p>
+          <div class="hero-links mono">
+            <a :href="portfolioData.about.linkedinUrl" target="_blank" rel="noopener">linkedin ↗</a>
+            <a :href="portfolioData.about.githubUrl" target="_blank" rel="noopener">github ↗</a>
           </div>
         </div>
 
-        <!-- Stats row -->
-        <div class="stats-row">
-          <div class="stat-item" v-for="s in portfolioData.about.stats" :key="s.label">
-            <span class="stat-value">{{ s.value }}</span>
-            <span class="stat-label">{{ s.label }}</span>
-          </div>
+        <figure class="hero-photo">
+          <img :src="profileImage" :alt="portfolioData.about.heroTitle" />
+          <figcaption class="mono">♪ now playing — lofi beats to deploy to</figcaption>
+        </figure>
+      </div>
+
+      <!-- Stats row -->
+      <div class="stats-row">
+        <div class="stat-item" v-for="s in portfolioData.about.stats" :key="s.label">
+          <span class="stat-value">{{ s.value }}</span>
+          <span class="stat-label">{{ s.label }}</span>
         </div>
       </div>
-    </div>
 
-    <!-- Bio details card -->
-    <div class="bio-section">
-      <div class="container">
-        <div class="bio-grid">
-          <div
-            v-for="(card, i) in portfolioData.about.bioCards"
-            :key="i"
-            class="bio-card"
-          >
-            <div class="bio-card-icon"></div>
-            <h3>{{ card.title }}</h3>
-            <p v-html="card.text"></p>
-          </div>
+      <!-- Bio cards -->
+      <div class="bio-grid">
+        <div
+          v-for="(card, i) in portfolioData.about.bioCards"
+          :key="i"
+          class="bio-card"
+        >
+          <span class="bio-index mono">{{ String(i + 1).padStart(2, '0') }}</span>
+          <h3>{{ card.title }}</h3>
+          <p v-html="card.text"></p>
         </div>
       </div>
     </div>
@@ -85,388 +44,169 @@
 </template>
 
 <script>
-import { ArrowRightOutlined, LinkedinOutlined, GithubOutlined } from '@ant-design/icons-vue'
 import profileImage from '../assets/pics/profile-pic.png'
 import { usePortfolioData } from '../composables/usePortfolioData.js'
 
 export default {
   name: 'AboutSection',
-  components: { ArrowRightOutlined, LinkedinOutlined, GithubOutlined },
   setup() {
     const { portfolioData } = usePortfolioData()
-
-    const scrollTo = (id) => {
-      const el = document.getElementById(id)
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
-
-    return { profileImage, portfolioData, scrollTo }
+    return { profileImage, portfolioData }
   },
 }
 </script>
 
 <style scoped>
-/* ─── Section shell ──────────────────────────────── */
 .about-section {
-  background: var(--color-bg);
-  position: relative;
-  overflow: hidden;
+  padding: 0;
 }
 
 /* ─── Hero ───────────────────────────────────────── */
 .hero {
-  padding: 5rem 0 3rem;
-  position: relative;
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  top: -200px;
-  left: -200px;
-  width: 700px;
-  height: 700px;
-  background: radial-gradient(circle, rgba(66,185,131,0.08) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.hero::after {
-  content: '';
-  position: absolute;
-  bottom: -100px;
-  right: -100px;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(66,185,131,0.05) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.hero-content {
-  display: grid;
-  grid-template-columns: auto 1fr;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
   gap: 4rem;
-  align-items: center;
-  position: relative;
-  z-index: 1;
+  padding: 11rem 0 6rem;
 }
 
-/* Avatar */
-.hero-left { display: flex; justify-content: center; }
-
-.avatar-ring {
-  width: 240px;
-  height: 240px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #42b983 0%, #2d8f63 50%, #42b983 100%);
-  padding: 3px;
-  flex-shrink: 0;
-  animation: avatar-glow 3s ease-in-out infinite;
-  box-shadow:
-    0 0 0 0 rgba(66, 185, 131, 0.5),
-    0 8px 40px rgba(66, 185, 131, 0.2);
-}
-
-@keyframes avatar-glow {
-  0%, 100% {
-    box-shadow:
-      0 0 12px 2px rgba(66, 185, 131, 0.35),
-      0 8px 40px rgba(66, 185, 131, 0.15);
-  }
-  50% {
-    box-shadow:
-      0 0 28px 8px rgba(66, 185, 131, 0.55),
-      0 12px 50px rgba(66, 185, 131, 0.3);
-  }
-}
-
-.avatar-img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid var(--color-bg);
-  display: block;
-  transition: transform 0.4s ease;
-}
-
-.avatar-ring:hover .avatar-img {
-  transform: scale(1.04);
-}
-
-/* Hero text */
-.hero-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: rgba(66,185,131,0.1);
-  border: 1px solid rgba(66,185,131,0.25);
-  color: var(--color-green);
-  font-size: 0.85rem;
-  font-weight: 500;
-  padding: 0.4rem 1rem;
-  border-radius: 50px;
-  margin-bottom: 1.5rem;
-  width: fit-content;
-}
-
-.status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--color-green);
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(66,185,131,0.6); }
-  50%       { box-shadow: 0 0 0 6px rgba(66,185,131,0); }
-}
-
-.hero-title {
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: 800;
-  line-height: 1.1;
-  margin-bottom: 0.75rem;
-  letter-spacing: -0.03em;
-  color: var(--color-white);
-}
-
-.highlight {
-  background: linear-gradient(135deg, #42b983, #5de0a1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.hero-text {
+  flex: 999 1 520px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .hero-tagline {
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: var(--color-text-muted);
-  margin-bottom: 1.25rem;
-  letter-spacing: 0.01em;
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.hero-title {
+  font-size: clamp(3.5rem, 9vw, 7.5rem);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  /* Quebra "Augusto Santos" em duas linhas no desktop */
+  max-width: 6.5ch;
 }
 
 .hero-bio {
-  font-size: 1rem;
-  line-height: 1.75;
-  color: var(--color-text-muted);
-  max-width: 580px;
-  margin-bottom: 1.5rem;
+  max-width: 560px;
+  font-size: 1.125rem;
+  line-height: 1.65;
 }
 
-.hero-bio strong {
+.hero-bio :deep(strong) {
   color: var(--color-text);
-  font-weight: 600;
+  font-weight: 400;
 }
 
-/* Tags */
-.hero-tags {
+.hero-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
+  gap: 1.5rem;
+  font-size: 0.875rem;
 }
 
-.tag {
-  padding: 0.35rem 0.85rem;
-  border-radius: 50px;
-  border: 1px solid var(--color-border);
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--color-text-muted);
-  transition: all 0.2s ease;
-  background: var(--color-bg-card);
+.hero-links a {
+  border-bottom: 1px solid var(--color-accent);
+  padding-bottom: 0.25rem;
 }
 
-.tag:hover {
-  border-color: var(--color-green);
-  color: var(--color-green);
-  background: var(--color-green-dim);
-}
-
-/* Action buttons */
-.hero-actions {
+.hero-photo {
+  flex: 1 1 240px;
+  max-width: 300px;
   display: flex;
+  flex-direction: column;
   gap: 0.75rem;
-  flex-wrap: wrap;
 }
 
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.7rem 1.5rem;
-  border-radius: 50px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.25s ease;
-  cursor: pointer;
+.hero-photo img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  filter: grayscale(1) contrast(1.05);
+  transition: filter 0.6s ease;
 }
 
-.btn-primary {
-  background: var(--color-green);
-  color: white;
-  box-shadow: 0 4px 20px rgba(66,185,131,0.3);
-}
+.hero-photo:hover img { filter: grayscale(0); }
 
-.btn-primary:hover {
-  background: #5de0a1;
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(66,185,131,0.45);
-}
-
-.btn-ghost {
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  color: var(--color-text);
-}
-
-.btn-ghost:hover {
-  border-color: var(--color-green);
-  color: var(--color-green);
-  background: var(--color-green-dim);
+.hero-photo figcaption {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
 }
 
 /* ─── Stats row ──────────────────────────────────── */
 .stats-row {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: var(--color-border);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  margin-top: 4rem;
-  position: relative;
-  z-index: 1;
-}
-
-.stat-item {
-  background: var(--color-bg-card);
-  padding: 2rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  align-items: center;
-  text-align: center;
-  transition: background 0.2s ease;
-}
-
-.stat-item:hover { background: rgba(66,185,131,0.06); }
-
-.stat-value {
-  font-family: var(--font-display);
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: var(--color-green);
-  line-height: 1;
-}
-
-.stat-label {
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-  font-weight: 500;
-}
-
-/* ─── Bio section ────────────────────────────────── */
-.bio-section {
-  background: var(--color-bg-alt);
-  padding: 4rem 0;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
 }
 
-.bio-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+.stat-item {
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.bio-card {
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: 2rem;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
+.stat-value {
+  font-size: 2.75rem;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--color-text);
 }
 
-.bio-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #42b983, transparent);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
+.stat-item:last-child .stat-value { color: var(--color-accent); }
 
-.bio-card:hover {
-  border-color: rgba(66,185,131,0.3);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
-}
-
-.bio-card:hover::before { opacity: 1; }
-
-.bio-card-icon {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-.bio-card h3 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--color-white);
-  margin-bottom: 0.75rem;
-}
-
-.bio-card p {
-  font-size: 0.9rem;
-  line-height: 1.7;
+.stat-label {
+  font-size: 0.875rem;
   color: var(--color-text-muted);
 }
 
-.bio-card p strong {
+/* ─── Bio cards ──────────────────────────────────── */
+.bio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 3rem;
+  padding: 6rem 0;
+}
+
+.bio-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.bio-index {
+  font-size: 0.75rem;
+  color: var(--color-accent);
+}
+
+.bio-card h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.bio-card p {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+
+.bio-card p :deep(strong) {
   color: var(--color-text);
-  font-weight: 600;
+  font-weight: 400;
 }
 
-/* ─── Responsive ─────────────────────────────────── */
-@media (max-width: 900px) {
-  .hero-content {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 2.5rem;
-  }
-
-  .hero-left { order: -1; }
-
-  .avatar-ring {
-    width: 180px;
-    height: 180px;
-    margin: 0 auto;
-  }
-
-  .hero-eyebrow { margin: 0 auto 1.5rem; }
-  .hero-bio { margin: 0 auto 1.5rem; }
-  .hero-tags, .hero-actions { justify-content: center; }
-
-  .stats-row { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 768px) {
-  .bio-grid { grid-template-columns: 1fr; }
-  .hero { padding: 3rem 0 2rem; }
-}
-
-@media (max-width: 480px) {
-  .stats-row { grid-template-columns: repeat(2, 1fr); }
-  .stat-value { font-size: 2rem; }
+@media (max-width: 640px) {
+  .hero { padding: 8rem 0 4rem; gap: 3rem; }
+  .hero-title { max-width: none; }
+  .bio-grid { padding: 4rem 0; }
 }
 </style>

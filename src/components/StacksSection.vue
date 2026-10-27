@@ -1,51 +1,17 @@
 <template>
   <section id="stacks" class="stacks-section">
     <div class="container">
-      <div class="section-header">
-        <p class="section-eyebrow">Tecnologias</p>
-        <h2 class="section-title">Stacks Conhecidas</h2>
-        <p class="section-subtitle">Ferramentas e tecnologias que domino no dia a dia</p>
-      </div>
+      <h2 class="section-label section-header">// stacks</h2>
 
-      <!-- Category groups -->
       <div class="stack-groups">
         <div v-for="group in stackGroups" :key="group.label" class="stack-group">
-          <div class="group-label">{{ group.label }}</div>
-          <div class="group-cards">
-            <div
-              v-for="stack in group.stacks"
-              :key="stack.name"
-              class="stack-pill"
-            >
-              <img :src="stack.icon" :alt="stack.name" class="pill-icon" />
-              <span class="pill-name">{{ stack.name }}</span>
-              <span class="pill-level">{{ stack.level }}%</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Marquee ticker -->
-      <div class="ticker-wrap">
-        <div class="ticker-track">
-          <div
-            v-for="stack in allStacks"
-            :key="'a-' + stack.name"
-            class="ticker-item"
-          >
-            <img :src="stack.icon" :alt="stack.name" class="ticker-icon" />
-            {{ stack.name }}
-          </div>
-          <!-- Duplicate for seamless loop -->
-          <div
-            v-for="stack in allStacks"
-            :key="'b-' + stack.name"
-            class="ticker-item"
-            aria-hidden="true"
-          >
-            <img :src="stack.icon" :alt="stack.name" class="ticker-icon" />
-            {{ stack.name }}
-          </div>
+          <h3 class="group-label mono">{{ group.cleanLabel }}</h3>
+          <ul class="group-list">
+            <li v-for="stack in group.stacks" :key="stack.name" class="stack-item">
+              <span>{{ stack.name }}</span>
+              <span class="stack-level mono" :title="`Nível: ${stack.level}%`">{{ stack.level }}</span>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -60,177 +26,57 @@ export default {
   name: 'StacksSection',
   setup() {
     const { portfolioData } = usePortfolioData()
-    const stackGroups = computed(() => portfolioData.value.stacks)
-    const allStacks = computed(() => stackGroups.value.flatMap(g => g.stacks))
-    return { stackGroups, allStacks }
+    // Remove o emoji do início do rótulo ("⚡ Frontend" → "frontend")
+    const stackGroups = computed(() =>
+      portfolioData.value.stacks.map((g) => ({
+        ...g,
+        cleanLabel: g.label.replace(/^[^\p{L}]+/u, '').toLowerCase(),
+      }))
+    )
+    return { stackGroups }
   },
 }
 </script>
 
 <style scoped>
 .stacks-section {
-  background: var(--color-bg);
-  padding: 6rem 0;
-  border-top: 1px solid var(--color-border);
-  overflow: hidden;
+  padding: 3rem 0 6rem;
 }
 
 .section-header {
-  text-align: center;
-  margin-bottom: 3.5rem;
+  margin-bottom: 2.5rem;
 }
 
-.section-eyebrow {
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-green);
-  margin-bottom: 0.75rem;
-}
-
-.section-title {
-  font-size: clamp(2rem, 3.5vw, 2.75rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  color: var(--color-white);
-  margin-bottom: 0.75rem;
-}
-
-.section-subtitle {
-  font-size: 1rem;
-  color: var(--color-text-muted);
-}
-
-/* ─── Groups ────────────────────────────────────── */
 .stack-groups {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  margin-bottom: 3.5rem;
-}
-
-.stack-group {
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  transition: border-color 0.3s ease;
-}
-
-.stack-group:hover {
-  border-color: rgba(66,185,131,0.25);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2.5rem 2rem;
 }
 
 .group-label {
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--color-accent);
   margin-bottom: 1rem;
 }
 
-.group-cards {
+.group-list {
+  list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.625rem;
 }
 
-/* ─── Pill ──────────────────────────────────────── */
-.stack-pill {
+.stack-item {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.7rem 1rem;
-  border-radius: var(--radius-sm);
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  transition: all 0.25s ease;
-  cursor: default;
-}
-
-.stack-pill:hover {
-  border-color: rgba(66,185,131,0.4);
-  background: var(--color-green-dim);
-}
-
-.pill-icon {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
-  border-radius: 4px;
-  flex-shrink: 0;
-}
-
-.pill-name {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--color-text);
-  flex: 1;
-}
-
-.pill-level {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--color-green);
-  font-family: var(--font-display);
-}
-
-/* ─── Ticker ────────────────────────────────────── */
-.ticker-wrap {
-  width: 100%;
-  overflow: hidden;
-  mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
-  -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
-  border-top: 1px solid var(--color-border);
-  padding-top: 2rem;
-}
-
-.ticker-track {
-  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
   gap: 1rem;
-  width: max-content;
-  animation: ticker 35s linear infinite;
+  color: var(--color-text);
 }
 
-.ticker-track:hover { animation-play-state: paused; }
-
-@keyframes ticker {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.ticker-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.5rem 1.25rem;
-  border-radius: 50px;
-  border: 1px solid var(--color-border);
-  background: var(--color-bg-card);
-  font-size: 0.85rem;
-  font-weight: 600;
+.stack-level {
+  font-size: 0.6875rem;
   color: var(--color-text-muted);
-  white-space: nowrap;
-  transition: all 0.2s ease;
-}
-
-.ticker-item:hover {
-  border-color: var(--color-green);
-  color: var(--color-green);
-  background: var(--color-green-dim);
-}
-
-.ticker-icon {
-  width: 22px;
-  height: 22px;
-  object-fit: contain;
-  border-radius: 3px;
-}
-
-/* ─── Responsive ────────────────────────────────── */
-@media (max-width: 768px) {
-  .stack-groups { grid-template-columns: 1fr; }
 }
 </style>

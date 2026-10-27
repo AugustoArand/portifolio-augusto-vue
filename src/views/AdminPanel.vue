@@ -741,8 +741,8 @@ export default {
 /* ── Root ────────────────────────────────────────────────────────────────── */
 .admin-root {
   min-height: 100vh;
-  background: #0f1117;
-  color: #e8eaf0;
+  background: var(--color-bg-raised);
+  color: var(--color-text);
   font-family: 'Inter', sans-serif;
 }
 
@@ -768,27 +768,27 @@ export default {
 .login-logo {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #42b983, #2d8f63);
+  background: var(--color-accent);
   border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
   font-weight: 800;
-  color: white;
+  color: var(--color-on-accent);
   margin: 0 auto 1.5rem;
-  box-shadow: 0 0 24px rgba(66,185,131,0.3);
+  box-shadow: 0 0 24px rgba(201, 184, 255,0.3);
 }
 
 .login-title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #e8eaf0;
+  color: var(--color-text);
   margin-bottom: 0.25rem;
 }
 
 .login-sub {
-  color: #8a94a6;
+  color: var(--color-text-muted);
   font-size: 0.88rem;
   margin-bottom: 1.75rem;
 }
@@ -825,27 +825,27 @@ export default {
 .dash-logo {
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, #42b983, #2d8f63);
+  background: var(--color-accent);
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.9rem;
   font-weight: 800;
-  color: white;
+  color: var(--color-on-accent);
   flex-shrink: 0;
 }
 
 .dash-title {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #e8eaf0;
+  color: var(--color-text);
   line-height: 1.2;
 }
 
 .dash-sub {
   font-size: 0.78rem;
-  color: #8a94a6;
+  color: var(--color-text-muted);
 }
 
 .dash-actions {
@@ -880,7 +880,7 @@ export default {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #42b983;
+  color: var(--color-accent);
   margin-bottom: 1.25rem;
 }
 
@@ -894,7 +894,7 @@ export default {
 
 .section-info {
   font-size: 0.85rem;
-  color: #8a94a6;
+  color: var(--color-text-muted);
   margin: 0;
 }
 
@@ -909,7 +909,7 @@ export default {
 .field-label {
   font-size: 0.82rem;
   font-weight: 600;
-  color: #8a94a6;
+  color: var(--color-text-muted);
 }
 
 .hint {
@@ -1005,7 +1005,7 @@ export default {
 .project-index {
   font-size: 0.78rem;
   font-weight: 700;
-  color: #42b983;
+  color: var(--color-accent);
   flex: 1;
 }
 
@@ -1061,7 +1061,7 @@ export default {
 .stack-icon-url { flex: 1; min-width: 140px; }
 .stack-level-wrap { display: flex; align-items: center; gap: 0.25rem; flex-shrink: 0; }
 .stack-level-input { width: 70px; }
-.stack-level-pct { color: #42b983; font-weight: 700; font-size: 0.85rem; }
+.stack-level-pct { color: var(--color-accent); font-weight: 700; font-size: 0.85rem; }
 
 /* ── Article blocks ──────────────────────────────────────────────────────── */
 .article-block {
@@ -1082,7 +1082,7 @@ export default {
 .article-index {
   font-size: 0.78rem;
   font-weight: 700;
-  color: #42b983;
+  color: var(--color-accent);
   flex: 1;
 }
 
@@ -1100,13 +1100,13 @@ export default {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  background: #42b983;
-  color: white;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
   padding: 0.75rem 1.5rem;
   border-radius: 50px;
   font-weight: 600;
   font-size: 0.9rem;
-  box-shadow: 0 4px 24px rgba(66,185,131,0.4);
+  box-shadow: 0 4px 24px rgba(201, 184, 255,0.4);
   z-index: 9999;
   animation: fadeInUp 0.3s ease;
 }

@@ -2,73 +2,29 @@
   <section id="projects" class="projects-section">
     <div class="container">
       <div class="section-header">
-        <p class="section-eyebrow">Portfólio</p>
-        <h2 class="section-title">Projetos em Destaque</h2>
-        <p class="section-subtitle">
-          Conheça alguns dos projetos que desenvolvi ao longo da minha jornada
-        </p>
+        <h2 class="section-label">// projetos selecionados</h2>
+        <router-link v-if="projects.length > displayedProjects.length" to="/projetos" class="view-all mono">
+          ver todos ({{ projects.length }}) →
+        </router-link>
       </div>
 
-      <!-- Featured project (first, larger) -->
-      <div v-if="projects.length" class="featured-project" @click="openModal(projects[0])" style="cursor:pointer">
-        <div class="featured-image-wrap">
-          <img :src="projects[0].image" :alt="projects[0].title" class="featured-img" />
-          <div class="featured-overlay">
-            <button class="overlay-btn" @click.stop="openModal(projects[0])">
-              <EyeOutlined /> Ver Detalhes
-            </button>
-          </div>
-        </div>
-        <div class="featured-info">
-          <span class="featured-tag">⭐ Destaque</span>
-          <h3 class="featured-title">{{ projects[0].title }}</h3>
-          <p class="featured-desc">{{ projects[0].description }}</p>
-          <div class="project-tags">
-            <span v-for="t in projects[0].tags" :key="t" class="tech-tag">{{ t }}</span>
-          </div>
-          <button class="featured-link" @click.stop="openModal(projects[0])">
-            Ver Detalhes <ArrowRightOutlined />
+      <ul class="project-list">
+        <li v-for="(project, index) in displayedProjects" :key="project.title">
+          <button type="button" class="project-row" @click="openModal(project)">
+            <span class="row-index mono">{{ String(index + 1).padStart(2, '0') }}</span>
+            <span class="row-title">{{ project.title }}</span>
+            <span class="row-tags mono">{{ (project.tags || []).slice(0, 3).join(' · ') }}</span>
+            <span class="row-arrow" aria-hidden="true">→</span>
+            <img
+              v-if="project.image"
+              :src="project.image"
+              alt=""
+              class="row-preview"
+              loading="lazy"
+            />
           </button>
-        </div>
-      </div>
-
-      <!-- Supporting projects grid -->
-      <div class="projects-grid">
-        <div
-          v-for="(project, index) in displayedProjects"
-          :key="project.title"
-          class="project-card"
-          :style="{ animationDelay: `${index * 0.08}s` }"
-          @click="openModal(project)"
-          style="cursor:pointer"
-        >
-          <div class="card-image-wrap">
-            <img :src="project.image" :alt="project.title" class="card-img" />
-            <div class="card-overlay">
-              <button class="overlay-icon-btn" @click.stop="openModal(project)">
-                <EyeOutlined />
-              </button>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="project-tags">
-              <span v-for="t in project.tags" :key="t" class="tech-tag">{{ t }}</span>
-            </div>
-            <h3 class="card-title">{{ project.title }}</h3>
-            <p class="card-desc">{{ project.description }}</p>
-            <span class="card-link">
-              Ver detalhes <ArrowRightOutlined />
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <div v-if="projects.length > 4" class="view-all-wrap">
-        <button class="view-all-btn" @click="$router.push('/projetos')">
-          Ver todos os projetos ({{ projects.length }})
-          <ArrowRightOutlined />
-        </button>
-      </div>
+        </li>
+      </ul>
     </div>
 
     <ProjectModal
@@ -80,18 +36,17 @@
 </template>
 
 <script>
-import { ArrowRightOutlined, EyeOutlined, ProjectOutlined } from '@ant-design/icons-vue'
 import { computed, ref } from 'vue'
 import { usePortfolioData } from '../composables/usePortfolioData.js'
 import ProjectModal from './ProjectModal.vue'
 
 export default {
   name: 'ProjectsSection',
-  components: { ArrowRightOutlined, EyeOutlined, ProjectOutlined, ProjectModal },
+  components: { ProjectModal },
   setup() {
     const { portfolioData } = usePortfolioData()
     const projects = computed(() => portfolioData.value.projects)
-    const displayedProjects = computed(() => projects.value.slice(1, 5))
+    const displayedProjects = computed(() => projects.value.slice(0, 6))
 
     const modalVisible = ref(false)
     const selectedProject = ref(null)
@@ -108,337 +63,110 @@ export default {
 
 <style scoped>
 .projects-section {
-  background: var(--color-bg-alt);
-  padding: 6rem 0;
-  border-top: 1px solid var(--color-border);
+  padding: 3rem 0 6rem;
 }
 
 .section-header {
-  text-align: center;
-  margin-bottom: 4rem;
-}
-
-.section-eyebrow {
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-green);
-  margin-bottom: 0.75rem;
-}
-
-.section-title {
-  font-size: clamp(2rem, 3.5vw, 2.75rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  color: var(--color-white);
-  margin-bottom: 0.75rem;
-}
-
-.section-subtitle {
-  font-size: 1rem;
-  color: var(--color-text-muted);
-  max-width: 520px;
-  margin: 0 auto;
-}
-
-/* ─── Featured ─────────────────────────────────── */
-.featured-project {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 2.5rem;
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  margin-bottom: 2rem;
-  transition: border-color 0.3s ease;
-}
-
-.featured-project:hover {
-  border-color: rgba(66,185,131,0.3);
-}
-
-.featured-image-wrap {
-  position: relative;
-  overflow: hidden;
-  min-height: 320px;
-}
-
-.featured-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-  display: block;
-}
-
-.featured-project:hover .featured-img { transform: scale(1.04); }
-
-.featured-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(8,8,8,0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.featured-project:hover .featured-overlay { opacity: 1; }
-
-.overlay-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.75rem;
-  background: var(--color-green);
-  color: white;
-  border-radius: 50px;
-  font-weight: 700;
-  font-size: 0.95rem;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.overlay-btn:hover { transform: scale(1.05); color: white; }
-
-.featured-info {
-  padding: 2.5rem 2.5rem 2.5rem 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.featured-tag {
-  display: inline-flex;
-  padding: 0.3rem 0.8rem;
-  border-radius: 50px;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  background: var(--color-green-dim);
-  border: 1px solid rgba(66,185,131,0.3);
-  color: var(--color-green);
-  width: fit-content;
-}
-
-.featured-title {
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: var(--color-white);
-  line-height: 1.25;
-  letter-spacing: -0.02em;
-}
-
-.featured-desc {
-  font-size: 0.95rem;
-  line-height: 1.7;
-  color: var(--color-text-muted);
-}
-
-.featured-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 700;
-  color: var(--color-green);
-  font-size: 0.95rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  font-family: var(--font-body);
-  transition: gap 0.2s ease;
-}
-
-.featured-link:hover { gap: 0.9rem; color: #5de0a1; }
-
-/* ─── Grid ─────────────────────────────────────── */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.25rem;
-}
-
-.project-card {
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: all 0.3s ease;
-  animation: fadeInUp 0.6s ease-out both;
-}
-
-.project-card:hover {
-  border-color: rgba(66,185,131,0.3);
-  transform: translateY(-6px);
-  box-shadow: 0 20px 48px rgba(0,0,0,0.4);
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.card-image-wrap {
-  position: relative;
-  overflow: hidden;
-  height: 180px;
-  background: var(--color-bg);
-}
-
-.card-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s ease;
-}
-
-.project-card:hover .card-img { transform: scale(1.1); }
-
-.card-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(8,8,8,0.75);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.project-card:hover .card-overlay { opacity: 1; }
-
-.overlay-icon-btn {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--color-green);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.25rem;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.overlay-icon-btn:hover { transform: scale(1.15); color: white; }
-
-.card-body {
-  padding: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  flex: 1;
-}
-
-.project-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
-.tech-tag {
-  padding: 0.2rem 0.65rem;
-  border-radius: 50px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  border: 1px solid var(--color-border);
-  color: var(--color-text-muted);
-  background: var(--color-bg-card);
-  transition: all 0.2s ease;
+.view-all {
+  font-size: 0.8125rem;
 }
 
-.tech-tag:hover {
-  border-color: var(--color-green);
-  color: var(--color-green);
-  background: var(--color-green-dim);
-}
-
-.card-title {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--color-white);
-  line-height: 1.4;
-}
-
-.card-desc {
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-  line-height: 1.6;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  flex: 1;
-}
-
-.card-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--color-green);
-  margin-top: auto;
-  padding-top: 0.75rem;
+.project-list {
+  list-style: none;
   border-top: 1px solid var(--color-border);
-  transition: gap 0.2s;
 }
 
-.card-link:hover { gap: 0.75rem; color: #5de0a1; }
+.project-list li {
+  border-bottom: 1px solid var(--color-border);
+}
 
-/* ─── View All ─────────────────────────────────── */
-.view-all-wrap {
+.project-row {
+  position: relative;
+  width: 100%;
   display: flex;
-  justify-content: center;
-  margin-top: 2.5rem;
-}
-
-.view-all-btn {
-  display: inline-flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.85rem 2.5rem;
-  border-radius: 50px;
+  gap: 0.5rem 1.5rem;
+  padding: 1.75rem 0.75rem;
   background: transparent;
-  border: 1px solid var(--color-border);
+  border: none;
   color: var(--color-text);
-  font-size: 0.95rem;
-  font-weight: 600;
+  font: inherit;
+  text-align: left;
   cursor: pointer;
-  transition: all 0.25s ease;
-  font-family: var(--font-body);
+  transition: background 0.25s ease;
 }
 
-.view-all-btn:hover {
-  border-color: var(--color-green);
-  color: var(--color-green);
-  background: var(--color-green-dim);
+.project-row:hover {
+  background: var(--color-bg-raised);
 }
 
-/* ─── Responsive ────────────────────────────────── */
-@media (max-width: 1100px) {
-  .projects-grid { grid-template-columns: repeat(2, 1fr); }
+.row-index {
+  width: 2rem;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
 }
 
-@media (max-width: 900px) {
-  .featured-project { grid-template-columns: 1fr; }
-  .featured-image-wrap { min-height: 240px; }
-  .featured-info { padding: 1.5rem; }
-  .featured-title { font-size: 1.4rem; }
+.row-title {
+  flex: 1 1 320px;
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.row-tags {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.row-arrow {
+  font-size: 1.25rem;
+  color: var(--color-text-muted);
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.project-row:hover .row-arrow {
+  transform: translateX(6px);
+  color: var(--color-accent);
+}
+
+/* Prévia da imagem que aparece ao passar o mouse (só desktop) */
+.row-preview {
+  position: absolute;
+  right: 4rem;
+  top: 50%;
+  width: 220px;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-50%) rotate(-2deg) scale(0.95);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 2;
+}
+
+.project-row:hover .row-preview {
+  opacity: 1;
+  transform: translateY(-50%) rotate(-2deg) scale(1);
+}
+
+@media (max-width: 900px), (hover: none) {
+  .row-preview { display: none; }
 }
 
 @media (max-width: 640px) {
-  .projects-grid { grid-template-columns: 1fr; }
-  .featured-project { border-radius: var(--radius-lg); }
+  .row-title { font-size: 1.25rem; }
+  .row-arrow { display: none; }
 }
 </style>

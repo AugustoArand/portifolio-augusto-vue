@@ -2,9 +2,11 @@
   <a-config-provider
     :theme="{
       token: {
-        colorPrimary: '#42b983',
-        borderRadius: 8,
-        fontFamily: 'Inter, system-ui, sans-serif',
+        colorPrimary: '#C9B8FF',
+        colorTextLightSolid: '#0B0A10',
+        colorBgBase: '#0B0A10',
+        borderRadius: 4,
+        fontFamily: 'Inter Tight, system-ui, sans-serif',
       },
       algorithm: darkAlgorithm,
     }"
@@ -53,19 +55,18 @@ export default {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: var(--color-green);
-  color: white;
+  background: var(--color-bg-raised);
+  border: 1px solid var(--color-border);
+  color: var(--color-accent);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
-  box-shadow: 0 4px 20px rgba(66, 185, 131, 0.4);
-  transition: all 0.25s ease;
+  font-size: 1rem;
+  transition: border-color 0.25s ease, transform 0.25s ease;
 }
 
 .back-to-top:hover {
-  background: #5de0a1;
-  transform: scale(1.1) translateY(-2px);
-  box-shadow: 0 8px 28px rgba(66, 185, 131, 0.5);
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
 }
 </style>

@@ -1,35 +1,45 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 /* ─── CSS Tokens ──────────────────────────────────────────── */
+/* Paleta lofi: preto profundo + lilás claro */
 :root {
   /* Colors */
-  --color-bg:        #080808;
-  --color-bg-alt:    #0f1117;
-  --color-bg-card:   rgba(255, 255, 255, 0.04);
-  --color-border:    rgba(255, 255, 255, 0.08);
-  --color-green:     #42b983;
-  --color-green-dim: rgba(66, 185, 131, 0.15);
-  --color-green-glow: rgba(66, 185, 131, 0.35);
-  --color-text:      #e8eaf0;
-  --color-text-muted:#8a94a6;
-  --color-white:     #ffffff;
+  --color-bg:          #0B0A10;
+  --color-bg-alt:      #0B0A10;
+  --color-bg-raised:   #15131C;
+  --color-bg-card:     rgba(201, 184, 255, 0.03);
+  --color-border:      #2A2635;
+  --color-accent:      #C9B8FF;
+  --color-accent-soft: #E6DDFF;
+  --color-accent-dim:  rgba(201, 184, 255, 0.12);
+  --color-accent-glow: rgba(201, 184, 255, 0.3);
+  --color-on-accent:   #0B0A10;
+  --color-text:        #EDEAF5;
+  --color-text-muted:  #A39DB5;
+  --color-white:       #EDEAF5;
+
+  /* Aliases legados (AllProjects, Modal e Admin ainda usam estes nomes) */
+  --color-green:      var(--color-accent);
+  --color-green-dim:  var(--color-accent-dim);
+  --color-green-glow: var(--color-accent-glow);
 
   /* Typography */
-  --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
-  --font-body:    'Inter', system-ui, sans-serif;
+  --font-display: 'Inter Tight', system-ui, sans-serif;
+  --font-body:    'Inter Tight', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
 
   /* Spacing */
   --section-pad: 6rem 0;
-  --container:   1320px;
-  --radius-sm:   8px;
-  --radius-md:   16px;
-  --radius-lg:   24px;
-  --radius-xl:   32px;
+  --container:   1120px;
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
 
   /* Shadows */
-  --shadow-card: 0 4px 24px rgba(0,0,0,0.4);
-  --shadow-hover: 0 12px 48px rgba(66,185,131,0.2);
-  --shadow-glow:  0 0 40px rgba(66,185,131,0.15);
+  --shadow-card:  0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-hover: 0 12px 48px rgba(201, 184, 255, 0.12);
+  --shadow-glow:  0 0 40px rgba(201, 184, 255, 0.1);
 }
 
 /* ─── Reset ───────────────────────────────────────────────── */
@@ -67,24 +77,40 @@ h1, h2, h3, h4, h5, h6 {
 p { color: var(--color-text-muted); }
 
 a {
-  color: var(--color-green);
+  color: var(--color-accent);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-a:hover { color: #5de0a1; }
+a:hover { color: var(--color-accent-soft); }
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
 
 /* ─── Layout ──────────────────────────────────────────────── */
 .container {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1.5rem;
 }
 
 section {
   padding: var(--section-pad);
   width: 100%;
 }
+
+/* Rótulo de seção no estilo "// comentário" */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  letter-spacing: 0;
+}
+
+.mono { font-family: var(--font-mono); }
 
 /* ─── Ant Design Overrides ────────────────────────────────── */
 .ant-layout { background: var(--color-bg); }
@@ -96,13 +122,21 @@ section {
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--color-bg); }
 ::-webkit-scrollbar-thumb {
-  background: rgba(66, 185, 131, 0.4);
+  background: rgba(201, 184, 255, 0.3);
   border-radius: 3px;
 }
-::-webkit-scrollbar-thumb:hover { background: var(--color-green); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-accent); }
 
 /* ─── Selection ───────────────────────────────────────────── */
 ::selection {
-  background: var(--color-green-dim);
-  color: var(--color-green);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
