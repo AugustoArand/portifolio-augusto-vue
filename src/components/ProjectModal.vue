@@ -11,7 +11,7 @@
     <div v-if="project" class="modal-content">
       <!-- Gallery -->
       <div class="gallery-wrap" :class="{ 'gallery-wrap--portrait': project.galleryMode === 'portrait' }">
-        <a-carousel arrows autoplay :dots="hasMultipleImages">
+        <a-carousel :arrows="hasMultipleImages" autoplay :dots="hasMultipleImages">
           <!-- Primary image always shown -->
           <div class="gallery-slide">
             <img :src="project.image" :alt="project.title" class="gallery-img" :class="{ 'gallery-img--contain': project.galleryMode === 'portrait' }" />
@@ -102,9 +102,9 @@ export default {
 
 <style>
 .project-modal-wrap .ant-modal-content {
-  background: #111 !important;
-  border: 1px solid rgba(66, 185, 131, 0.2);
-  border-radius: 20px !important;
+  background: var(--color-bg-raised) !important;
+  border: 1px solid var(--color-border);
+  border-radius: 8px !important;
   padding: 0 !important;
   overflow: hidden;
 }
@@ -123,6 +123,13 @@ export default {
 .project-modal-wrap .ant-modal-body {
   padding: 0 !important;
 }
+
+/* O antd desenha "←"/"→" via ::before nas setas do slick; como usamos
+   ícones próprios no slot, escondemos o pseudo-elemento para não duplicar. */
+.project-modal-wrap .carousel-arrow::before {
+  content: none !important;
+  display: none !important;
+}
 </style>
 
 <style scoped>
@@ -134,7 +141,7 @@ export default {
 /* ── Gallery ─────────────────────────────────── */
 .gallery-wrap {
   width: 100%;
-  background: #0a0a0a;
+  background: var(--color-bg);
 }
 
 .gallery-slide {
@@ -147,7 +154,7 @@ export default {
 
 .gallery-wrap--portrait .gallery-slide {
   height: 500px;
-  background: #0d0d0d;
+  background: var(--color-bg);
 }
 
 .gallery-img {
@@ -179,7 +186,8 @@ export default {
 }
 
 .carousel-arrow:hover {
-  background: rgba(66, 185, 131, 0.7);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
   border-color: transparent;
 }
 
@@ -206,19 +214,15 @@ export default {
 }
 
 .tech-tag {
-  padding: 0.2rem 0.7rem;
-  border-radius: 50px;
+  font-family: var(--font-mono);
   font-size: 0.75rem;
-  font-weight: 600;
-  border: 1px solid rgba(66, 185, 131, 0.35);
-  color: #42b983;
-  background: rgba(66, 185, 131, 0.08);
+  color: var(--color-accent);
 }
 
 .modal-title {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: #fff;
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: var(--color-text);
   line-height: 1.25;
   letter-spacing: -0.02em;
   margin: 0;
@@ -226,7 +230,7 @@ export default {
 
 .modal-desc {
   font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--color-text-muted);
   line-height: 1.7;
   margin: 0;
 }
@@ -244,35 +248,33 @@ export default {
   align-items: center;
   gap: 0.5rem;
   padding: 0.65rem 1.4rem;
-  border-radius: 50px;
-  font-size: 0.9rem;
-  font-weight: 700;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
   text-decoration: none;
   transition: all 0.2s ease;
 }
 
 .action-btn--primary {
-  background: #42b983;
-  color: #fff;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
 }
 
 .action-btn--primary:hover {
-  background: #34a870;
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(66, 185, 131, 0.4);
+  background: var(--color-accent-soft);
+  color: var(--color-on-accent);
 }
 
 .action-btn--secondary {
   background: transparent;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
 }
 
 .action-btn--secondary:hover {
-  border-color: #42b983;
-  color: #42b983;
-  transform: translateY(-2px);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
 }
 
 .private-badge {
@@ -280,10 +282,10 @@ export default {
   align-items: center;
   gap: 0.4rem;
   padding: 0.65rem 1.2rem;
-  border-radius: 50px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.4);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
