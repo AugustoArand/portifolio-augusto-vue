@@ -7,10 +7,10 @@
 export const defaultData = {
   about: {
     heroTitle: 'Augusto Santos',
-    heroTagline: 'QA · Análise de Requisitos · CPRE-FL Certified',
+    heroTagline: 'QA· DevOps · Linux',
     heroBio:
-      'Apaixonado por motos e tecnologia, atualmente cursando <strong>Análise e Desenvolvimento de Sistemas</strong> e atuando como <strong>Estagiário QA</strong> na Tecsinapse. Certificado <strong>CPRE-FL</strong> pelo IREB.',
-    heroTags: ['Testes Automatizados', 'Cloud', 'Javascript', 'DevOps', 'Ruby'],
+      'Apaixonado por motos e tecnologia, atualmente cursando <strong>Análise e Desenvolvimento de Sistemas</strong> e atuando como <strong>DevOps Junior</strong> na Ciberian Tecnologia. Certificado <strong>CPRE-FL</strong> pelo IREB.',
+    heroTags: ['Openshift RedHat', 'Cloud', 'Linux', 'DevOps', 'Ruby'],
     linkedinUrl: 'https://www.linkedin.com/in/augusto-arandiba-b26b90105/',
     githubUrl: 'https://github.com/AugustoArand',
     stats: [
@@ -21,12 +21,12 @@ export const defaultData = {
     ],
     bioCards: [
       {
-        title: 'Experiência em QA',
-        text: 'Testes manuais, automatizados, funcionais, não funcionais, regressão e confirmação. Gestão de bugs com <strong>Jira</strong>, <strong>Azure DevOps</strong> e <strong>GitHub Actions</strong>.',
+        title: 'DevOps e Infraestrutura',
+        text: 'Atuo como DevOps Jr na migração de aplicações legadas para OpenShift, com entrega contínua via ArgoCD, cloud Azure e monitoramento com Zabbix e Grafana. Administração e suporte de servidores Linux.',
       },
       {
-        title: 'Desenvolvimento Full-Stack',
-        text: 'JavaScript, Node.js, React, Vue.js, Next.js, Prisma ORM, Ruby. Banco de dados: <strong>PostgreSQL</strong>, <strong>MySQL</strong>, <strong>MongoDB</strong>.',
+        title: 'Qualidade e Automação',
+        text: 'Base sólida em QA: testes manuais e automatizados, funcionais, não funcionais, de regressão e reteste. Automação integrada a pipelines CI/CD com GitHub Actions e Azure DevOps, e gestão de bugs no Jira.',
       },
       {
         title: 'Certificações',
@@ -160,14 +160,33 @@ export const defaultData = {
         { name: 'MongoDB', iconKey: 'mongo', level: 92 },
         { name: 'Jira', iconKey: 'jira', level: 92 },
         { name: 'Github Actions', iconKey: 'github', level: 85 },
-        { name: 'Grafana', iconKey: 'grafana', level: 70 },
         { name: 'Redis', iconKey: 'redis', level: 50 },
-
+      ],
+    },
+    {
+      label: '☁️ DevOps & Infraestrutura',
+      stacks: [
+        { name: 'OpenShift', iconKey: 'openshift', level: 70 },
+        { name: 'ArgoCD', iconKey: 'argocd', level: 65 },
+        { name: 'Azure', iconKey: 'azure', level: 60 },
+        { name: 'Linux', iconKey: 'linux', level: 75 },
+        { name: 'Zabbix', iconKey: 'zabbix', level: 60 },
+        { name: 'Grafana', iconKey: 'grafana', level: 70 },
       ],
     },
   ],
 
   articles: [
+    {
+      id: 9,
+      title: 'De QA a DevOps: a transição que começou antes de eu perceber',
+      excerpt:
+        'Se alguém me perguntasse quando decidi migrar para DevOps, eu não saberia apontar uma data.',
+      date: '24 Out 2026',
+      category: 'DevOps',
+      readingTime: '5 min',
+      link: 'https://www.linkedin.com/feed/update/urn:li:activity:7519871321833566208/',
+    },
     {
       id: 1,
       title:

@@ -167,6 +167,7 @@ export default {
 .cat-cpre    { background: var(--color-green-dim); border: 1px solid rgba(66,185,131,0.3); color: var(--color-green); }
 .cat-ctflfl  { background: rgba(59,130,246,0.12); border: 1px solid rgba(59,130,246,0.3); color: #60a5fa; }
 .cat-ctflat  { background: rgba(249,115,22,0.12); border: 1px solid rgba(249,115,22,0.3); color: #fb923c; }
+.cat-devops  { background: rgba(238,0,0,0.12); border: 1px solid rgba(238,0,0,0.3); color: #f87171; }
 
 .article-date {
   display: inline-flex;

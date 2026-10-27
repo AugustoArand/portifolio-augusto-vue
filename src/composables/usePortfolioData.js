@@ -47,6 +47,11 @@ import gitHubIcon from '../assets/pics/github-logo.png'
 import grafanaIcon from '../assets/pics/grafana-icon.png'
 import redisIcon from '../assets/pics/Redis-Logo.png'
 import playwrightIcon from '../assets/pics/playwright-logo.png'
+import openshiftIcon from '../assets/pics/openshift.svg'
+import argocdIcon from '../assets/pics/argocd.svg'
+import azureIcon from '../assets/pics/azure.svg'
+import linuxIcon from '../assets/pics/linux.svg'
+import zabbixIcon from '../assets/pics/zabbix.svg'
 
 // ── Mapas de resolução ────────────────────────────────────────────────────────
 export const imageMap = {
@@ -86,6 +91,11 @@ export const iconMap = {
   grafana: grafanaIcon,
   redis: redisIcon,
   playwright: playwrightIcon,
+  openshift: openshiftIcon,
+  argocd: argocdIcon,
+  azure: azureIcon,
+  linux: linuxIcon,
+  zabbix: zabbixIcon,
 }
 
 // ── Labels legíveis para os iconKeys (usado no admin) ────────────────────────
@@ -106,6 +116,11 @@ export const iconLabels = {
   grafana: 'Grafana',
   playwright: 'Playwright',
   redis: 'Redis',
+  openshift: 'OpenShift',
+  argocd: 'ArgoCD',
+  azure: 'Azure',
+  linux: 'Linux',
+  zabbix: 'Zabbix',
 }
 
 // ── Configuração da API ───────────────────────────────────────────────────────

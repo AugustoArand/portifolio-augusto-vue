@@ -1,6 +1,6 @@
 # Portfólio Augusto Arand - Vue.js
 
-Portfólio pessoal criado com Vue.js e configurado para deploy automático no GitHub Pages.
+Portfólio pessoal criado com Vue.js e publicado no Railway.
 
 ![Portfolio Screenshot](https://github.com/user-attachments/assets/ae2022f1-d266-4fa5-9322-bcd732d29035)
 
@@ -48,7 +48,7 @@ npm install
 npm run dev
 ```
 
-O projeto estará disponível em `http://localhost:5173/portifolio-augusto-vue/`
+O projeto estará disponível em `http://localhost:8080/`
 
 ### Build para Produção
 
@@ -60,24 +60,16 @@ npm run build
 npm run preview
 ```
 
-## 🌐 Deploy no GitHub Pages
+## 🌐 Deploy
 
-O projeto está configurado para deploy automático no GitHub Pages usando GitHub Actions.
-
-### Configuração
-
-1. No seu repositório GitHub, vá em **Settings** > **Pages**
-2. Em **Source**, selecione **GitHub Actions**
-3. Faça um push para a branch `main`
-
-O workflow `.github/workflows/deploy.yml` será executado automaticamente e fará o deploy do site.
-
-### Acesso ao Site
-
-Após o deploy, o site estará disponível em:
+O site está publicado no Railway:
 ```
-https://augustoarand.github.io/portifolio-augusto-vue/
+https://portfolio-production-ac84.up.railway.app
 ```
+
+O GitHub Pages continua ativo pelo workflow `.github/workflows/deploy.yml`, que faz a build com `VITE_BASE=/portifolio-augusto-vue/`. Sem essa variável, a base é `/` (Railway).
+
+Na build de produção, defina a variável `VITE_API_URL` com a URL da API (ex.: `https://<sua-api>/api`). Na API, defina `FRONTEND_URL` com a URL do site para liberar o CORS.
 
 ## 📁 Estrutura do Projeto
 
@@ -85,7 +77,7 @@ https://augustoarand.github.io/portifolio-augusto-vue/
 portifolio-augusto-vue/
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml          # Workflow de deploy automático
+│       └── deploy.yml          # Workflow de deploy no GitHub Pages
 ├── public/                     # Arquivos públicos estáticos
 ├── src/
 │   ├── assets/
