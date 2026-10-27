@@ -11,7 +11,7 @@
     <div v-if="project" class="modal-content">
       <!-- Gallery -->
       <div class="gallery-wrap" :class="{ 'gallery-wrap--portrait': project.galleryMode === 'portrait' }">
-        <a-carousel arrows autoplay :dots="hasMultipleImages">
+        <a-carousel :arrows="hasMultipleImages" autoplay :dots="hasMultipleImages">
           <!-- Primary image always shown -->
           <div class="gallery-slide">
             <img :src="project.image" :alt="project.title" class="gallery-img" :class="{ 'gallery-img--contain': project.galleryMode === 'portrait' }" />
@@ -122,6 +122,13 @@ export default {
 
 .project-modal-wrap .ant-modal-body {
   padding: 0 !important;
+}
+
+/* O antd desenha "←"/"→" via ::before nas setas do slick; como usamos
+   ícones próprios no slot, escondemos o pseudo-elemento para não duplicar. */
+.project-modal-wrap .carousel-arrow::before {
+  content: none !important;
+  display: none !important;
 }
 </style>
 
