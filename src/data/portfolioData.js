@@ -178,6 +178,16 @@ export const defaultData = {
 
   articles: [
     {
+      id: 10,
+      title: 'Coloquei Rust no meu backend Rails. O resultado não foi o que eu esperava',
+      excerpt:
+        'Um relato sobre levar Rust para dentro de um backend Rails e o que essa experiência realmente me ensinou.',
+      date: '21 Nov 2026',
+      category: 'Dev',
+      readingTime: '5 min',
+      link: 'https://www.linkedin.com/pulse/coloquei-rust-meu-backend-rails-o-resultado-n%C3%A3o-foi-que-arandiba-ab1mf/',
+    },
+    {
       id: 9,
       title: 'De QA a DevOps: a transição que começou antes de eu perceber',
       excerpt:
