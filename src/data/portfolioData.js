@@ -178,6 +178,16 @@ export const defaultData = {
 
   articles: [
     {
+      id: 11,
+      title: 'Crítica da Razão Artificial: Kant, o mercado de IA e os limites da máquina',
+      excerpt:
+        'Uma reflexão sobre o que Kant tem a dizer sobre a inteligência artificial, o mercado que se formou ao redor dela e os seus limites.',
+      date: '22 Nov 2026',
+      category: 'Dev',
+      readingTime: '5 min',
+      link: 'https://www.linkedin.com/pulse/cr%C3%ADtica-da-raz%C3%A3o-artificial-kant-o-mercado-de-e-os-limites-arandiba-oruaf',
+    },
+    {
       id: 10,
       title: 'Coloquei Rust no meu backend Rails. O resultado não foi o que eu esperava',
       excerpt:
